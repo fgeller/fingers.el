@@ -12,6 +12,7 @@
 ;; TODOs:
 ;;  - Use SubWord mode for marking word
 ;;  - Register as global minor mode?
+;;  - Remove redundant jump for next occurrence helpers
 ;;
 
 (require 'thingatpt)
