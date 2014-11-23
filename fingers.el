@@ -12,7 +12,6 @@
 ;; TODOs:
 ;;  - Use SubWord mode for marking word
 ;;  - Register as global minor mode?
-;;  - Remove redundant jump for next occurrence helpers
 ;;
 
 ;;
@@ -63,18 +62,26 @@
 ;;
 (defun fingers-move-to-next-word-occurrence ()
   (interactive)
-  (search-forward (thing-at-point 'word)))
+  (fingers-beginning-of-word)
+  (forward-word)
+  (search-forward (thing-at-point 'word))
+  (fingers-beginning-of-word))
 
 (defun fingers-move-to-next-symbol-occurrence ()
   (interactive)
-  (search-forward (thing-at-point 'symbol)))
+  (fingers-beginning-of-symbol)
+  (forward-symbol 1)
+  (search-forward (thing-at-point 'symbol))
+  (fingers-beginning-of-symbol))
 
 (defun fingers-move-to-previous-word-occurrence ()
   (interactive)
+  (fingers-beginning-of-word)
   (search-backward (thing-at-point 'word)))
 
 (defun fingers-move-to-previous-symbol-occurrence ()
   (interactive)
+  (fingers-beginning-of-symbol)
   (search-backward (thing-at-point 'symbol)))
 
 ;;
@@ -167,7 +174,8 @@
 
 (defun fingers-beginning-of-word ()
   (interactive)
-  (backward-word))
+  (while (not (fingers-looking-at-word))
+    (left-char 1)))
 
 ;;
 ;; mark
