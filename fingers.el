@@ -11,7 +11,6 @@
 ;;
 ;; TODOs:
 ;;  - Use SubWord mode for marking word
-;;  - Register as global minor mode?
 ;;
 
 ;;
