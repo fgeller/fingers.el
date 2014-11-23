@@ -9,6 +9,8 @@
 ;;  - boon: https://github.com/jyp/boon
 ;;  - god-mode: https://github.com/chrisdone/god-mode
 ;;
+;; TODO:
+;;  - fingers-copy
 
 ;;
 ;; Selection keys
