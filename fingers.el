@@ -49,6 +49,12 @@
       (message "Defining binding for [%s] to target [%s]" key target)
       (define-key map (kbd key) target))))
 
+(defun fingers-meta ()
+  (interactive)
+  (let* ((next-key (read-key "M-"))
+	 (next-key-sequence (concat "M-" (string next-key))))
+    (fingers-pass-events next-key-sequence)))
+
 ;;
 ;; Helpers for navigation
 ;;
@@ -123,13 +129,14 @@
     (h . yank)
     (H . helm-show-kill-ring)
     (t . fingers-kill)
-    (g . fingers-replace-char)
+    (g . fingers-meta)
 
     ;; bottom row
     (x . ,fingers-mode-x-map)
     (m . kmacro-start-macro)
     (M . kmacro-end-macro)
     (c . ,fingers-mode-c-map)
+    (v . fingers-replace-char)
 
     ;; right hand -- navigation
     ;;
