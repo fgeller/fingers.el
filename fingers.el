@@ -392,6 +392,8 @@
 
       ;; top row
       (d . fingers-duplicate-line)
+      (r . query-replace)
+      (R . query-replace-regexp)
       (w . join-line)
       (b . open-line)
 
@@ -457,6 +459,7 @@
   `(
     (c . save-buffers-kill-terminal)
     (e . eval-last-sexp)
+    (h . mark-whole-buffer)
     (k . kill-buffer)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
