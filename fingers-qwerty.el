@@ -7,6 +7,16 @@
 ;; (setq fingers-keyboard-layout-mapper 'fingers-workman-to-qwerty)
 ;; (fingers-reset-bindings)
 ;;
+;; (setq fingers-selection-specifiers
+;;   '((line . ?f)
+;;     (line-rest . ?r)
+;;     (word . ?d)
+;;     (symbol . ?e)
+;;     (inside-pair . ?s)
+;;     (with-pair . ?a)
+;;     (with-pair-and-whitespace . ?q)))
+;;
+
 ;; This currently maps bindings for the main `fingers-mode-map', not for
 ;; `fingers-mode-x-map' or `fingers-mode-c-map' which are mostly using default
 ;; Emacs bindings.

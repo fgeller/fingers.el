@@ -30,6 +30,14 @@
      (require 'fingers-qwerty)
      (setq fingers-keyboard-layout-mapper 'fingers-workman-to-qwerty)
      (fingers-reset-bindings)
+     (setq fingers-selection-specifiers
+           '((line . ?f)
+             (line-rest . ?r)
+             (word . ?d)
+             (symbol . ?e)
+             (inside-pair . ?s)
+             (with-pair . ?a)
+             (with-pair-and-whitespace . ?q)))
    #+end_src
 
 ** Description
