@@ -9,9 +9,6 @@
 ;;  - boon: https://github.com/jyp/boon
 ;;  - god-mode: https://github.com/chrisdone/god-mode
 ;;
-;; TODOs:
-;;  - Use SubWord mode for marking word
-;;
 
 ;;
 ;; Selection keys
