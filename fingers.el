@@ -412,6 +412,7 @@
     (c . save-buffers-kill-terminal)
     (e . eval-last-sexp)
     (f . helm-find-files)
+    (g . magit-status)
     (k . kill-buffer)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
