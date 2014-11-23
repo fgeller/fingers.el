@@ -461,6 +461,7 @@
   `(
     (b . ,(fingers-pass-events-command "C-c C-b"))
     (c . ,(fingers-pass-events-command "C-c C-c"))
+    (f . ,(fingers-pass-events-command "C-c C-f"))
     (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
     ))
 
