@@ -11,7 +11,6 @@
 ;;
 ;; TODOs:
 ;;  - Use SubWord mode for marking word
-;;  - Take out custom bindings (helm, org, magit, ...)
 ;;
 
 ;;
@@ -369,8 +368,6 @@
 
     ;; top row
     (d . fingers-duplicate-line)
-    (r . anzu-query-replace)
-    (R . anzu-query-replace-regexp)
     (w . join-line)
     (b . open-line)
 
@@ -378,7 +375,6 @@
     (a . fingers-enclose-in-pair)
     (s . fingers-remove-enclosing-pair)
     (h . yank)
-    (H . helm-show-kill-ring)
     (t . fingers-kill)
     (g . fingers-meta)
 
@@ -396,7 +392,6 @@
     ;; k l , . /
 
     ;; top row
-    (j . helm-apropos)
     (fn . point-to-register)
     (ff . jump-to-register)
     (ue . isearch-forward)
@@ -424,12 +419,6 @@
     (,(intern "\"") . end-of-buffer)
 
     ;; bottom row
-    (k . ag-project)
-    (K . ag)
-    (l . ace-jump-mode)
-    (L . ace-jump-char-mode)
-    (,(intern ".") . c/helm-jump)
-    (> . helm-occur)
     (/ . undo)
 
     (SPC . fingers-mark)
@@ -442,11 +431,9 @@
   `(
     (c . save-buffers-kill-terminal)
     (e . eval-last-sexp)
-    (f . helm-find-files)
     (k . kill-buffer)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
-    (x . helm-M-x)
     (0 . delete-window)
     (1 . delete-other-windows)
     (2 . split-window-below)
