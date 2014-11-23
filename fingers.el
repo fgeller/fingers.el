@@ -433,10 +433,6 @@
     (,(intern "'") . ,(fingers-pass-events-command "C-c C-'"))
     ))
 
-;; chords
-
-(key-chord-define-global "oe" 'fingers-mode-toggle-globally)
-
 ;;
 ;; Mode management
 ;;
