@@ -27,6 +27,9 @@
 ;;
 ;; Helpers for bindings
 ;;
+
+(defvar fingers-keyboard-layout-mapper 'identity "Mapping function from Workman to a different keyboard layout")
+
 (defun fingers-pass-events (kbd-string)
   "Helper to pass keyboard events through to shadowed maps. Based on `boon-push-events'"
   (setq unread-command-events
@@ -37,15 +40,24 @@
      (interactive)
      (fingers-pass-events ,kbd-string)))
 
-(defun define-keys (map bindings)
+(defun fingers-clear-keymap (keymap)
+  (let (loop)
+    (setq loop 0)
+    (while (<= loop ?z)
+      (define-key map (char-to-string loop) nil)
+      (setq loop (1+ loop)))))
+
+(defun fingers-define-keys (layout-mapper map bindings)
   "Defines bindings in MAP as defined in BINDINGS"
+  (fingers-clear-keymap map)
   (dolist (binding bindings)
-    (let ((key (cond ((symbolp (car binding)) (symbol-name (car binding)))
-                     ((numberp (car binding)) (number-to-string (car binding)))
-                     (t (error (format "unexpected key: %s" (car binding))))))
-          (target (cdr binding)))
-      (message "Defining binding for [%s] to target [%s]" key target)
-      (define-key map (kbd key) target))))
+    (let* ((key (cond ((symbolp (car binding)) (symbol-name (car binding)))
+		      ((numberp (car binding)) (number-to-string (car binding)))
+		      (t (error (format "unexpected key: %s" (car binding))))))
+	   (target (cdr binding))
+	   (mapped-sequence (funcall layout-mapper key)))
+      (message "Defining binding for [%s] to target [%s]" mapped-sequence target)
+      (define-key map (kbd mapped-sequence) target))))
 
 (defun fingers-meta ()
   (interactive)
@@ -354,77 +366,80 @@
 ;;
 ;; Main command mode map
 ;;
+(defun fingers-reset-bindings ()
+  (interactive)
+  (fingers-define-keys fingers-keyboard-layout-mapper fingers-mode-map
+    `(
+      ;; left hand -- manipulation
+      ;;
+      ;; q d r w b
+      ;; a s h t g
+      ;; z x m c v
 
-(define-keys fingers-mode-map
-  `(
-    ;; left hand -- manipulation
-    ;;
-    ;; q d r w b
-    ;; a s h t g
-    ;; z x m c v
+      ;; top row
+      (d . fingers-duplicate-line)
+      (w . join-line)
+      (b . open-line)
 
-    ;; top row
-    (d . fingers-duplicate-line)
-    (w . join-line)
-    (b . open-line)
+      ;; home row
+      (a . fingers-enclose-in-pair)
+      (s . fingers-remove-enclosing-pair)
+      (h . yank)
+      (t . fingers-kill)
+      (g . fingers-meta)
 
-    ;; home row
-    (a . fingers-enclose-in-pair)
-    (s . fingers-remove-enclosing-pair)
-    (h . yank)
-    (t . fingers-kill)
-    (g . fingers-meta)
+      ;; bottom row
+      (x . ,fingers-mode-x-map)
+      (m . kmacro-start-macro)
+      (M . kmacro-end-macro)
+      (c . ,fingers-mode-c-map)
+      (v . fingers-replace-char)
 
-    ;; bottom row
-    (x . ,fingers-mode-x-map)
-    (m . kmacro-start-macro)
-    (M . kmacro-end-macro)
-    (c . ,fingers-mode-c-map)
-    (v . fingers-replace-char)
+      ;; right hand -- navigation
+      ;;
+      ;; j f u p ; [
+      ;; y n e o i '
+      ;; k l , . /
 
-    ;; right hand -- navigation
-    ;;
-    ;; j f u p ; [
-    ;; y n e o i '
-    ;; k l , . /
+      ;; top row
+      (fn . point-to-register)
+      (ff . jump-to-register)
+      (ue . isearch-forward)
+      (uu . isearch-repeat-forward)
+      (uh . fingers-move-to-next-word-occurrence)
+      (ur . fingers-move-to-next-symbol-occurrence)
+      (uo . isearch-occur)
+      (po . isearch-backward)
+      (pp . isearch-repeat-backward)
+      (ph . fingers-move-to-previous-word-occurrence)
+      (pr . fingers-move-to-previous-symbol-occurrence)
 
-    ;; top row
-    (fn . point-to-register)
-    (ff . jump-to-register)
-    (ue . isearch-forward)
-    (uu . isearch-repeat-forward)
-    (uh . fingers-move-to-next-word-occurrence)
-    (ur . fingers-move-to-next-symbol-occurrence)
-    (uo . isearch-occur)
-    (po . isearch-backward)
-    (pp . isearch-repeat-backward)
-    (ph . fingers-move-to-previous-word-occurrence)
-    (pr . fingers-move-to-previous-symbol-occurrence)
+      ;; home row
+      (y . beginning-of-line)
+      (Y . beginning-of-buffer)
+      (n . left-char)
+      (N . backward-word)
+      (e . next-line)
+      (E . scroll-up-command)
+      (o . previous-line)
+      (O . scroll-down-command)
+      (i . right-char)
+      (I . forward-word)
+      (,(intern "'") . end-of-line)
+      (,(intern "\"") . end-of-buffer)
 
-    ;; home row
-    (y . beginning-of-line)
-    (Y . beginning-of-buffer)
-    (n . left-char)
-    (N . backward-word)
-    (e . next-line)
-    (E . scroll-up-command)
-    (o . previous-line)
-    (O . scroll-down-command)
-    (i . right-char)
-    (I . forward-word)
-    (,(intern "'") . end-of-line)
-    (,(intern "\"") . end-of-buffer)
+      ;; bottom row
+      (/ . undo)
 
-    ;; bottom row
-    (/ . undo)
-
-    (SPC . fingers-mark)
+      (SPC . fingers-mark)
+      )
     ))
+(fingers-reset-bindings)
 
 ;;
 ;; x-map
 ;;
-(define-keys fingers-mode-x-map
+(fingers-define-keys 'identity fingers-mode-x-map
   `(
     (c . save-buffers-kill-terminal)
     (e . eval-last-sexp)
@@ -440,7 +455,7 @@
 ;;
 ;; c-map
 ;;
-(define-keys fingers-mode-c-map
+(fingers-define-keys 'identity fingers-mode-c-map
   `(
     (b . ,(fingers-pass-events-command "C-c C-b"))
     (c . ,(fingers-pass-events-command "C-c C-c"))
