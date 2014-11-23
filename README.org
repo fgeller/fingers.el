@@ -1,0 +1,58 @@
+* fingers.el
+
+  Modal editing for Emacs.
+
+** Installation
+
+   Add this repository to your =load-path= and load it via:
+
+   #+begin_src emacs-lisp
+     (require 'fingers)
+   #+end_src
+
+   And then add additional bindings as needed. For example to trigger
+   =magit-status= via =xg= in fingers-mode:
+
+   #+begin_src emacs-lisp
+     (define-key fingers-mode-x-map (kbd "g") 'magit-status)
+   #+end_src
+
+   Or to trigger =ag-project= via =k= in fingers-mode:
+
+   #+begin_src emacs-lisp
+     (define-key fingers-mode-map (kbd "k") 'ag-project)
+   #+end_src
+
+   For Qwerty users, use the following to change the basic mappings (not for =x=
+   and =c= prefix):
+
+   #+begin_src emacs-lisp
+     (require 'fingers-qwerty)
+     (setq fingers-keyboard-layout-mapper 'fingers-workman-to-qwerty)
+     (fingers-reset-bindings)
+   #+end_src
+
+** Description
+
+   - Based on ideas found in
+     - boon: https://github.com/jyp/boon
+     - god-mode: https://github.com/chrisdone/god-mode
+
+   - Minor mode that reduces usage of modifiers like Control and Meta
+
+   - Easy navigation via right hand, basic text manipulation via left hand
+
+   - Basic navigation all on left home row: beginning of line, left, down, up,
+     right, end of line.
+
+   - Basic text manipulation on right home row: enclose in pair, remove
+     surrounding pair, yank, kill (with selection specifiers for word, symbol,
+     whole line, between pairs, with pairs, with pairs and whitespace).
+
+   - Prefers ease of key press over mnemonics.
+
+   - Based on the Workman keyboard layout, supports basic mapping to other layouts
+
+   - Invoke Meta bindings (=M-=) via =g= prefix. For example: =g;= to trigger
+     =M-;= which is commonly bound to =comment-dwim=. Or =gq= to trigger =M-q=
+     which is commonly bound to =fill-paragraph=.
