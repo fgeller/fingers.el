@@ -11,6 +11,7 @@
 ;;
 ;; TODOs:
 ;;  - Use SubWord mode for marking word
+;;  - Take out custom bindings (helm, org, magit, ...)
 ;;
 
 ;;
@@ -459,7 +460,7 @@
   `(
     (b . ,(fingers-pass-events-command "C-c C-b"))
     (c . ,(fingers-pass-events-command "C-c C-c"))
-    (,(intern "'") . ,(fingers-pass-events-command "C-c C-'"))
+    (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
     ))
 
 ;;
