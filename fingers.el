@@ -15,16 +15,19 @@
 ;;  - Remove redundant jump for next occurrence helpers
 ;;
 
+;;
+;; Selection keys
+;;
+;; t: whole line
+;; w: point until end of line
+;; h: word
+;; r: symbol
+;; s: inside pair
+;; a: with pair
+;; q: with pair and surrounding whitespace
+;; pairs: (), {}, [], <>, '', ""
+
 (require 'thingatpt)
-
-(defun fingers-mode-clean-map ()
-  (let ((map (make-sparse-keymap)))
-    (suppress-keymap map t)
-    map))
-
-(defvar fingers-mode-map (fingers-mode-clean-map))
-(defvar fingers-mode-x-map (fingers-mode-clean-map))
-(defvar fingers-mode-c-map (fingers-mode-clean-map))
 
 ;;
 ;; Helpers for bindings
@@ -104,8 +107,248 @@
     (forward-char 1)
     (yank)))
 
+(defun fingers-dispatch-with-pair (target &optional default)
+  (let ((next-key (read-key "Pair start character: ")))
+    (cond ((= next-key ?\() (funcall target "(" ")"))
+          ((= next-key ?\{) (funcall target "{" "}"))
+          ((= next-key ?\[) (funcall target "[" "]"))
+          ((= next-key ?\<) (funcall target "<" ">"))
+          ((= next-key ?\') (funcall target "'" "'"))
+          ((= next-key ?\") (funcall target "\"" "\""))
+          (t (when default (funcall default))
+             (fingers-pass-events (string next-key))))))
+
+(defun fingers-move-point-to-balanced-start (start end)
+  (fingers-move-point-to-balanced t start end))
+
+(defun fingers-move-point-to-balanced-end (start end)
+  (fingers-move-point-to-balanced nil start end))
+
+(defun fingers-move-point-to-balanced (look-for-start start end)
+  (let ((counter 1))
+    (while (> counter 0)
+      (if look-for-start (backward-char 1) (forward-char 1))
+      (cond ((looking-at (regexp-quote (if look-for-start end start))) (setq counter (1+ counter)))
+            ((looking-at (regexp-quote (if look-for-start start end))) (setq counter (1- counter)))))))
+
+(defun fingers-move-point-to-pair-start-simple (pair)
+  (message "looking for simple [%s]" pair)
+  (backward-char 1)
+  (while (not (looking-at (regexp-quote pair)))
+    (backward-char 1)))
+
+(defun fingers-move-point-to-pair-end-simple (pair)
+  (forward-char 1)
+  (while (not (looking-at (regexp-quote pair)))
+    (forward-char 1)))
+
+(defun fingers-move-point-to-pair-starting-string (start end)
+  (if (string= start end)
+      (fingers-move-point-to-pair-start-simple start)
+    (fingers-move-point-to-balanced-start start end)))
+
+(defun fingers-move-point-to-pair-ending-string (start end)
+  (if (string= start end)
+      (fingers-move-point-to-pair-end-simple start)
+    (fingers-move-point-to-balanced-end start end)))
+
+(defun fingers-looking-at-symbol ()
+  (interactive)
+  (looking-at "\\_<"))
+
+(defun fingers-beginning-of-symbol ()
+  (interactive)
+  (while (not (fingers-looking-at-symbol))
+    (left-char 1)))
+
+(defun fingers-looking-at-word ()
+  (interactive)
+  (looking-at "\\<"))
+
+(defun fingers-beginning-of-word ()
+  (interactive)
+  (backward-word))
+
 ;;
-;; Main command mode
+;; mark
+;;
+
+(defun fingers-mark ()
+  (interactive)
+  (let ((next-key (read-key "Mark: ")))
+    (cond ((= next-key ?t) (fingers-mark-whole-line))
+          ((= next-key ?w) (fingers-mark-until-end-of-line))
+          ((= next-key ?h) (fingers-mark-word))
+          ((= next-key ?r) (fingers-mark-symbol))
+          ((= next-key ?s) (fingers-mark-inside-pair))
+          ((= next-key ?a) (fingers-mark-with-pair))
+          ((= next-key ?q) (fingers-mark-with-pair-and-whitespace))
+          (t (set-mark (point))
+             (fingers-pass-events (string next-key))))))
+
+(defun fingers-mark-word ()
+  (unless (fingers-looking-at-word) (fingers-beginning-of-word))
+  (set-mark (point))
+  (forward-word))
+
+(defun fingers-mark-symbol ()
+  (interactive)
+  (unless (fingers-looking-at-symbol) (fingers-beginning-of-symbol))
+  (set-mark (point))
+  (forward-symbol 1))
+
+(defun fingers-mark-until-end-of-line ()
+  (interactive)
+  (set-mark (point))
+  (end-of-line))
+
+(defun fingers-mark-whole-line ()
+  (interactive)
+  (beginning-of-line)
+  (set-mark (point))
+  (end-of-line))
+
+(defun fingers-mark-inside-pair ()
+  (interactive)
+  (fingers-dispatch-with-pair 'fingers-mark-inside-pair-strings
+                              (lambda () (set-mark (point)))))
+
+(defun fingers-mark-inside-pair-strings (start end)
+  (interactive)
+  (fingers-move-point-to-pair-starting-string start end)
+  (forward-char 1)
+  (set-mark (point))
+  (backward-char 1)
+  (fingers-move-point-to-pair-ending-string start end))
+
+(defun fingers-mark-with-pair ()
+  (interactive)
+  (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings))
+
+(defun fingers-mark-with-pair-strings (start end)
+  (interactive)
+  (fingers-move-point-to-pair-starting-string start end)
+  (set-mark (point))
+  (fingers-move-point-to-pair-ending-string start end)
+  (forward-char 1))
+
+(defun fingers-mark-with-pair-strings-and-whitespace (start end)
+  (interactive)
+  (fingers-move-point-to-pair-starting-string start end)
+  (let ((starting-position (point)))
+    (skip-chars-backward " \t")
+    (set-mark (point))
+    (goto-char starting-position))
+  (fingers-move-point-to-pair-ending-string start end)
+  (forward-char 1)
+  (skip-chars-forward " \t"))
+
+(defun fingers-mark-with-pair-and-whitespace ()
+  (interactive)
+  (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings-and-whitespace))
+
+;;
+;; kill
+;;
+
+(defun fingers-kill ()
+  (interactive)
+  (if (region-active-p) (fingers-kill-current-region)
+    (let ((next-key (read-key "Kill: ")))
+      (cond ((= next-key ?t) (fingers-kill-whole-line))
+            ((= next-key ?w) (fingers-kill-until-end-of-line))
+            ((= next-key ?h) (fingers-kill-word))
+            ((= next-key ?r) (fingers-kill-symbol))
+            ((= next-key ?s) (fingers-kill-inside-pair))
+            ((= next-key ?a) (fingers-kill-with-pair))
+            ((= next-key ?q) (fingers-kill-with-pair-and-whitespace))
+            (t (fingers-pass-events (string next-key)))))))
+
+(defun fingers-kill-word ()
+  (interactive)
+  (fingers-mark-word)
+  (fingers-kill-current-region))
+
+(defun fingers-kill-symbol ()
+  (interactive)
+  (fingers-mark-symbol)
+  (fingers-kill-current-region))
+
+(defun fingers-kill-until-end-of-line ()
+  (interactive)
+  (fingers-mark-until-end-of-line)
+  (fingers-kill-current-region))
+
+(defun fingers-kill-whole-line ()
+  (interactive)
+  (fingers-mark-whole-line)
+  (fingers-kill-current-region)
+  (delete-char 1))
+
+(defun fingers-kill-inside-pair ()
+  (interactive)
+  (fingers-mark-inside-pair)
+  (fingers-kill-current-region))
+
+(defun fingers-kill-with-pair ()
+  (interactive)
+  (fingers-mark-with-pair)
+  (fingers-kill-current-region))
+
+(defun fingers-kill-with-pair-and-whitespace ()
+  (fingers-mark-with-pair-and-whitespace)
+  (fingers-kill-current-region))
+
+;;
+;; enclose
+;;
+
+(defun fingers-enclose-in-pair ()
+  (interactive)
+  (unless (region-active-p) (fingers-mark))
+  (fingers-dispatch-with-pair 'fingers-enclose-in-pair-strings))
+
+(defun fingers-enclose-in-pair-strings (start end)
+  (let* ((mark-position (mark))
+         (point-position (point))
+         (start-position (min mark-position point-position))
+         (end-position (max mark-position point-position)))
+    (goto-char end-position)
+    (insert end)
+    (goto-char start-position)
+    (insert start)
+    (goto-char (+ end-position (length end)))))
+
+;;
+;; remove enclosing pair
+;;
+
+(defun fingers-remove-enclosing-pair ()
+  (interactive)
+  (fingers-dispatch-with-pair 'fingers-remove-enclosing-pair-strings))
+
+(defun fingers-remove-enclosing-pair-strings (start end)
+  (fingers-mark-inside-pair-strings start end)
+  (let ((start-position (mark)))
+    (delete-char (length end))
+    (goto-char start-position)
+    (delete-char (- (length start)))))
+
+;;
+;; Keymaps
+;;
+
+(defun fingers-mode-clean-map ()
+  (let ((map (make-sparse-keymap)))
+    (suppress-keymap map t)
+    map))
+
+(defvar fingers-mode-map (fingers-mode-clean-map))
+(defvar fingers-mode-x-map (fingers-mode-clean-map))
+(defvar fingers-mode-c-map (fingers-mode-clean-map))
+
+;;
+;; Main command mode map
 ;;
 
 (define-keys fingers-mode-map
@@ -182,234 +425,6 @@
 
     (SPC . fingers-mark)
     ))
-
-;;
-;; Selection keys
-;;
-;; t: whole line
-;; w: point until end of line
-;; h: word
-;; r: symbol
-;; s: inside pair
-;; a: with pair
-;; q: with pair and surrounding whitespace
-;; pairs: (), {}, [], <>, '', ""
-
-(defun fingers-mark ()
-  (interactive)
-  (let ((next-key (read-key "Mark: ")))
-    (cond ((= next-key ?t) (fingers-mark-whole-line))
-          ((= next-key ?w) (fingers-mark-until-end-of-line))
-          ((= next-key ?h) (fingers-mark-word))
-          ((= next-key ?r) (fingers-mark-symbol))
-          ((= next-key ?s) (fingers-mark-inside-pair))
-          ((= next-key ?a) (fingers-mark-with-pair))
-          ((= next-key ?q) (fingers-mark-with-pair-and-whitespace))
-          (t (set-mark (point))
-             (fingers-pass-events (string next-key))))))
-
-(defun fingers-kill ()
-  (interactive)
-  (if (region-active-p) (fingers-kill-current-region)
-    (let ((next-key (read-key "Kill: ")))
-      (cond ((= next-key ?t) (fingers-kill-whole-line))
-            ((= next-key ?w) (fingers-kill-until-end-of-line))
-            ((= next-key ?h) (fingers-kill-word))
-            ((= next-key ?r) (fingers-kill-symbol))
-            ((= next-key ?s) (fingers-kill-inside-pair))
-            ((= next-key ?a) (fingers-kill-with-pair))
-            ((= next-key ?q) (fingers-kill-with-pair-and-whitespace))
-            (t (fingers-pass-events (string next-key)))))))
-
-(defun fingers-kill-with-pair-and-whitespace ()
-  (fingers-mark-with-pair-and-whitespace)
-  (fingers-kill-current-region))
-
-(defun fingers-kill-inside-pair ()
-  (interactive)
-  (fingers-mark-inside-pair)
-  (fingers-kill-current-region))
-
-(defun fingers-kill-with-pair ()
-  (interactive)
-  (fingers-mark-with-pair)
-  (fingers-kill-current-region))
-
-(defun fingers-kill-with-pair ()
-  (interactive)
-  (fingers-mark-with-pair-and-whitespace)
-  (fingers-kill-current-region))
-
-(defun fingers-mark-with-pair-and-whitespace ()
-  (interactive)
-  (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings-and-whitespace))
-
-(defun fingers-enclose-in-pair ()
-  (interactive)
-  (unless (region-active-p) (fingers-mark))
-  (fingers-dispatch-with-pair 'fingers-enclose-in-pair-strings))
-
-(defun fingers-enclose-in-pair-strings (start end)
-  (let* ((mark-position (mark))
-         (point-position (point))
-         (start-position (min mark-position point-position))
-         (end-position (max mark-position point-position)))
-    (goto-char end-position)
-    (insert end)
-    (goto-char start-position)
-    (insert start)
-    (goto-char (+ end-position (length end)))))
-
-(defun fingers-remove-enclosing-pair ()
-  (interactive)
-  (fingers-dispatch-with-pair 'fingers-remove-enclosing-pair-strings))
-
-(defun fingers-remove-enclosing-pair-strings (start end)
-  (fingers-mark-inside-pair-strings start end)
-  (let ((start-position (mark)))
-    (delete-char (length end))
-    (goto-char start-position)
-    (delete-char (- (length start)))))
-
-(defun fingers-mark-with-pair-strings-and-whitespace (start end)
-  (interactive)
-  (fingers-move-point-to-pair-starting-string start end)
-  (let ((starting-position (point)))
-    (skip-chars-backward " \t")
-    (set-mark (point))
-    (goto-char starting-position))
-  (fingers-move-point-to-pair-ending-string start end)
-  (forward-char 1)
-  (skip-chars-forward " \t"))
-
-(defun fingers-mark-with-pair ()
-  (interactive)
-  (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings))
-
-(defun fingers-mark-with-pair-strings (start end)
-  (interactive)
-  (fingers-move-point-to-pair-starting-string start end)
-  (set-mark (point))
-  (fingers-move-point-to-pair-ending-string start end)
-  (forward-char 1))
-
-(defun fingers-dispatch-with-pair (target &optional default)
-  (let ((next-key (read-key "Pair start character: ")))
-    (cond ((= next-key ?\() (funcall target "(" ")"))
-          ((= next-key ?\{) (funcall target "{" "}"))
-          ((= next-key ?\[) (funcall target "[" "]"))
-          ((= next-key ?\<) (funcall target "<" ">"))
-          ((= next-key ?\') (funcall target "'" "'"))
-          ((= next-key ?\") (funcall target "\"" "\""))
-          (t (when default (funcall default))
-             (fingers-pass-events (string next-key))))))
-
-(defun fingers-mark-inside-pair ()
-  (interactive)
-  (fingers-dispatch-with-pair 'fingers-mark-inside-pair-strings
-                              (lambda () (set-mark (point)))))
-
-(defun fingers-move-point-to-balanced-start (start end)
-  (fingers-move-point-to-balanced t start end))
-
-(defun fingers-move-point-to-balanced-end (start end)
-  (fingers-move-point-to-balanced nil start end))
-
-(defun fingers-move-point-to-balanced (look-for-start start end)
-  (let ((counter 1))
-    (while (> counter 0)
-      (if look-for-start (backward-char 1) (forward-char 1))
-      (cond ((looking-at (regexp-quote (if look-for-start end start))) (setq counter (1+ counter)))
-            ((looking-at (regexp-quote (if look-for-start start end))) (setq counter (1- counter)))))))
-
-(defun fingers-move-point-to-pair-start-simple (pair)
-  (message "looking for simple [%s]" pair)
-  (backward-char 1)
-  (while (not (looking-at (regexp-quote pair)))
-    (backward-char 1)))
-
-(defun fingers-move-point-to-pair-end-simple (pair)
-  (forward-char 1)
-  (while (not (looking-at (regexp-quote pair)))
-    (forward-char 1)))
-
-(defun fingers-move-point-to-pair-starting-string (start end)
-  (if (string= start end)
-      (fingers-move-point-to-pair-start-simple start)
-    (fingers-move-point-to-balanced-start start end)))
-
-(defun fingers-move-point-to-pair-ending-string (start end)
-  (if (string= start end)
-      (fingers-move-point-to-pair-end-simple start)
-    (fingers-move-point-to-balanced-end start end)))
-
-(defun fingers-mark-inside-pair-strings (start end)
-  (interactive)
-  (fingers-move-point-to-pair-starting-string start end)
-  (forward-char 1)
-  (set-mark (point))
-  (backward-char 1)
-  (fingers-move-point-to-pair-ending-string start end))
-
-(defun fingers-kill-symbol ()
-  (interactive)
-  (fingers-mark-symbol)
-  (fingers-kill-current-region))
-
-(defun fingers-looking-at-symbol ()
-  (interactive)
-  (looking-at "\\_<"))
-
-(defun fingers-beginning-of-symbol ()
-  (interactive)
-  (while (not (fingers-looking-at-symbol))
-    (left-char 1)))
-
-(defun fingers-mark-symbol ()
-  (interactive)
-  (unless (fingers-looking-at-symbol) (fingers-beginning-of-symbol))
-  (set-mark (point))
-  (forward-symbol 1))
-
-(defun fingers-kill-word ()
-  (interactive)
-  (fingers-mark-word)
-  (fingers-kill-current-region))
-
-(defun fingers-looking-at-word ()
-  (interactive)
-  (looking-at "\\<"))
-
-(defun fingers-beginning-of-word ()
-  (interactive)
-  (backward-word))
-
-(defun fingers-mark-word ()
-  (unless (fingers-looking-at-word) (fingers-beginning-of-word))
-  (set-mark (point))
-  (forward-word))
-
-(defun fingers-kill-until-end-of-line ()
-  (interactive)
-  (fingers-mark-until-end-of-line)
-  (fingers-kill-current-region))
-
-(defun fingers-mark-until-end-of-line ()
-  (interactive)
-  (set-mark (point))
-  (end-of-line))
-
-(defun fingers-kill-whole-line ()
-  (interactive)
-  (fingers-mark-whole-line)
-  (fingers-kill-current-region)
-  (delete-char 1))
-
-(defun fingers-mark-whole-line ()
-  (interactive)
-  (beginning-of-line)
-  (set-mark (point))
-  (end-of-line))
 
 ;;
 ;; x-map
