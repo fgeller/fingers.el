@@ -405,6 +405,7 @@
       (g . fingers-meta)
 
       ;; bottom row
+      (z . repeat)
       (x . ,fingers-mode-x-map)
       (m . kmacro-start-macro)
       (M . kmacro-end-macro)
