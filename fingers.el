@@ -460,6 +460,7 @@
   `(
     (c . save-buffers-kill-terminal)
     (e . eval-last-sexp)
+    (f . find-file)
     (h . mark-whole-buffer)
     (k . kill-buffer)
     (o . other-window)
