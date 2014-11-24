@@ -401,6 +401,7 @@
       (a . fingers-enclose-in-pair)
       (s . fingers-remove-enclosing-pair)
       (h . yank)
+      (H . yank-pop)
       (t . fingers-kill)
       (g . fingers-meta)
 
@@ -419,6 +420,7 @@
       ;; k l , . /
 
       ;; top row
+      (j . apropos)
       (fn . point-to-register)
       (ff . jump-to-register)
       (ue . isearch-forward)
@@ -446,6 +448,7 @@
       (,(intern "\"") . end-of-buffer)
 
       ;; bottom row
+      (k . grep)
       (/ . undo)
 
       (SPC . fingers-mark)
@@ -458,6 +461,7 @@
 ;;
 (fingers-define-keys 'identity fingers-mode-x-map
   `(
+    (b . switch-to-buffer)
     (c . save-buffers-kill-terminal)
     (e . eval-last-sexp)
     (f . find-file)
@@ -465,6 +469,7 @@
     (k . kill-buffer)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
+    (x . execute-extended-command)
     (0 . delete-window)
     (1 . delete-other-windows)
     (2 . split-window-below)
