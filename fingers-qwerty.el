@@ -8,7 +8,8 @@
 ;; (fingers-reset-bindings)
 ;;
 ;; (setq fingers-selection-specifiers
-;;   '((line . ?f)
+;;   '((char . ?b)
+;;     (line . ?f)
 ;;     (line-rest . ?r)
 ;;     (word . ?d)
 ;;     (symbol . ?e)
