@@ -9,8 +9,6 @@
 ;;  - boon: https://github.com/jyp/boon
 ;;  - god-mode: https://github.com/chrisdone/god-mode
 ;;
-;; TODO:
-;;  - fingers-copy
 
 ;;
 ;; Selection keys
@@ -123,8 +121,9 @@
     (insert char-to-insert)
     (backward-char 1)))
 
-(defun fingers-kill-current-region ()
-  (kill-region (point) (mark)))
+(defun fingers-copy-current-region (&optional kill)
+  (cond (kill (kill-region (point) (mark)))
+	(t (kill-ring-save (point) (mark)))))
 
 (defun fingers-duplicate-line ()
   (interactive)
@@ -285,65 +284,69 @@
   (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings-and-whitespace))
 
 ;;
-;; kill
+;; kill & copy
 ;;
 
 (defun fingers-kill ()
   (interactive)
-  (cond ((region-active-p) (fingers-kill-current-region))
+  (fingers-copy 'kill))
+
+(defun fingers-copy (&optional kill)
+  (interactive)
+  (cond ((region-active-p) (fingers-copy-current-region kill))
 	(t (let ((next-key (read-key "Kill: ")))
 	     (cond
-	      ((= next-key (fingers-selection-specifier 'char)) (fingers-kill-char))
-	      ((= next-key (fingers-selection-specifier 'line)) (fingers-kill-whole-line))
-	      ((= next-key (fingers-selection-specifier 'line-rest)) (fingers-kill-until-end-of-line))
-	      ((= next-key (fingers-selection-specifier 'word)) (fingers-kill-word))
-	      ((= next-key (fingers-selection-specifier 'symbol)) (fingers-kill-symbol))
-	      ((= next-key (fingers-selection-specifier 'inside-pair)) (fingers-kill-inside-pair))
-	      ((= next-key (fingers-selection-specifier 'with-pair)) (fingers-kill-with-pair))
-	      ((= next-key (fingers-selection-specifier 'with-pair-and-whitespace)) (fingers-kill-with-pair-and-whitespace))
+	      ((= next-key (fingers-selection-specifier 'char)) (fingers-copy-char kill))
+	      ((= next-key (fingers-selection-specifier 'line)) (fingers-copy-whole-line kill))
+	      ((= next-key (fingers-selection-specifier 'line-rest)) (fingers-copy-until-end-of-line kill))
+	      ((= next-key (fingers-selection-specifier 'word)) (fingers-copy-word kill))
+	      ((= next-key (fingers-selection-specifier 'symbol)) (fingers-copy-symbol kill))
+	      ((= next-key (fingers-selection-specifier 'inside-pair)) (fingers-copy-inside-pair kill))
+	      ((= next-key (fingers-selection-specifier 'with-pair)) (fingers-copy-with-pair kill))
+	      ((= next-key (fingers-selection-specifier 'with-pair-and-whitespace)) (fingers-copy-with-pair-and-whitespace kill))
 	      (t (set-mark (point))
 		 (call-interactively (key-binding (kbd (string next-key))))
-		 (fingers-kill-current-region)))))))
+		 (fingers-copy-current-region kill)))))))
 
-(defun fingers-kill-char ()
+(defun fingers-copy-char (&optional kill)
   (interactive)
   (fingers-mark-char)
-  (fingers-kill-current-region))
+  (fingers-copy-current-region kill))
 
-(defun fingers-kill-word ()
+(defun fingers-copy-word (&optional kill)
   (interactive)
   (fingers-mark-word)
-  (fingers-kill-current-region))
+  (fingers-copy-current-region kill))
 
-(defun fingers-kill-symbol ()
+(defun fingers-copy-symbol (&optional kill)
   (interactive)
   (fingers-mark-symbol)
-  (fingers-kill-current-region))
+  (fingers-copy-current-region kill))
 
-(defun fingers-kill-until-end-of-line ()
+(defun fingers-copy-until-end-of-line (&optional kill)
   (interactive)
   (fingers-mark-until-end-of-line)
-  (fingers-kill-current-region))
+  (fingers-copy-current-region kill))
 
-(defun fingers-kill-whole-line ()
+(defun fingers-copy-whole-line (&optional kill)
   (interactive)
   (fingers-mark-whole-line)
-  (fingers-kill-current-region)
+  (fingers-copy-current-region kill)
   (delete-char 1))
 
-(defun fingers-kill-inside-pair ()
+(defun fingers-copy-inside-pair (&optional kill)
   (interactive)
   (fingers-mark-inside-pair)
-  (fingers-kill-current-region))
+  (fingers-copy-current-region kill))
 
-(defun fingers-kill-with-pair ()
+(defun fingers-copy-with-pair (&optional kill)
   (interactive)
   (fingers-mark-with-pair)
-  (fingers-kill-current-region))
+  (fingers-copy-current-region kill))
 
-(defun fingers-kill-with-pair-and-whitespace ()
+(defun fingers-copy-with-pair-and-whitespace (&optional kill)
   (fingers-mark-with-pair-and-whitespace)
-  (fingers-kill-current-region))
+  (fingers-copy-current-region kill))
 
 ;;
 ;; enclose
@@ -419,6 +422,7 @@
       (h . yank)
       (H . yank-pop)
       (t . fingers-kill)
+      (T . fingers-copy)
       (g . fingers-meta)
 
       ;; bottom row
