@@ -15,7 +15,7 @@
 ;;     (symbol . ?e)
 ;;     (inside-pair . ?s)
 ;;     (with-pair . ?a)
-;;     (with-pair-and-whitespace . ?q)))
+;;     (with-pair-and-whitespace . ?A)))
 ;;
 
 ;; This currently maps bindings for the main `fingers-mode-map', not for

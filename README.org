@@ -38,7 +38,7 @@
              (symbol . ?e)
              (inside-pair . ?s)
              (with-pair . ?a)
-             (with-pair-and-whitespace . ?q)))
+             (with-pair-and-whitespace . ?A)))
    #+end_src
 
 ** Description

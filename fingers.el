@@ -9,6 +9,8 @@
 ;;  - boon: https://github.com/jyp/boon
 ;;  - god-mode: https://github.com/chrisdone/god-mode
 ;;
+;; TODO:
+;;  - Additional selection specifiers for region with whitespace
 
 ;;
 ;; Selection keys
@@ -19,7 +21,7 @@
 ;; r: symbol
 ;; s: inside pair
 ;; a: with pair
-;; q: with pair and surrounding whitespace
+;; A: with pair and surrounding whitespace
 ;; pairs: (), {}, [], <>, '', ""
 
 (require 'thingatpt)
@@ -37,7 +39,7 @@
     (symbol . ?r)
     (inside-pair . ?s)
     (with-pair . ?a)
-    (with-pair-and-whitespace . ?q))
+    (with-pair-and-whitespace . ?A))
   "Mapping from selection type to identifier key")
 
 (defun fingers-selection-specifier (type)
