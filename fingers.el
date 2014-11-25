@@ -9,16 +9,18 @@
 ;;  - boon: https://github.com/jyp/boon
 ;;  - god-mode: https://github.com/chrisdone/god-mode
 ;;
-;; TODO:
-;;  - Additional selection specifiers for region with whitespace
 
 ;;
 ;; Selection keys
 ;;
+;; v: char
+;; V: char and surrounding whitespace
 ;; t: whole line
 ;; w: point until end of line
 ;; h: word
+;; H: word and surrounding whitespace
 ;; r: symbol
+;; R: symbol and surrounding whitespace
 ;; s: inside pair
 ;; a: with pair
 ;; A: with pair and surrounding whitespace

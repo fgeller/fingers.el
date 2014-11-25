@@ -9,10 +9,13 @@
 ;;
 ;; (setq fingers-selection-specifiers
 ;;   '((char . ?b)
+;;     (char-and-whitespace . ?B)
 ;;     (line . ?f)
 ;;     (line-rest . ?r)
 ;;     (word . ?d)
+;;     (word-and-whitespace . ?D)
 ;;     (symbol . ?e)
+;;     (symbol-and-whitespace . ?E)
 ;;     (inside-pair . ?s)
 ;;     (with-pair . ?a)
 ;;     (with-pair-and-whitespace . ?A)))
