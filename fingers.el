@@ -195,20 +195,16 @@
     (fingers-move-point-to-balanced-end start end)))
 
 (defun fingers-looking-at-symbol-p ()
-  (interactive)
   (looking-at "\\_<"))
 
 (defun fingers-beginning-of-symbol ()
-  (interactive)
   (while (not (fingers-looking-at-symbol-p))
     (left-char 1)))
 
 (defun fingers-looking-at-word-p ()
-  (interactive)
   (looking-at "\\<"))
 
 (defun fingers-beginning-of-word ()
-  (interactive)
   (while (not (fingers-looking-at-word-p))
     (left-char 1)))
 
@@ -279,18 +275,15 @@
   (end-of-line))
 
 (defun fingers-mark-whole-line ()
-  (interactive)
   (beginning-of-line)
   (set-mark (point))
   (end-of-line))
 
 (defun fingers-mark-inside-pair ()
-  (interactive)
   (fingers-dispatch-with-pair 'fingers-mark-inside-pair-strings
                               (lambda () (set-mark (point)))))
 
 (defun fingers-mark-inside-pair-strings (start end)
-  (interactive)
   (fingers-move-point-to-pair-starting-string start end)
   (forward-char 1)
   (set-mark (point))
@@ -298,18 +291,15 @@
   (fingers-move-point-to-pair-ending-string start end))
 
 (defun fingers-mark-with-pair ()
-  (interactive)
   (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings))
 
 (defun fingers-mark-with-pair-strings (start end)
-  (interactive)
   (fingers-move-point-to-pair-starting-string start end)
   (set-mark (point))
   (fingers-move-point-to-pair-ending-string start end)
   (forward-char 1))
 
 (defun fingers-mark-with-pair-strings-and-whitespace (start end)
-  (interactive)
   (fingers-move-point-to-pair-starting-string start end)
   (let ((starting-position (point)))
     (skip-chars-backward " \t")
@@ -320,7 +310,6 @@
   (skip-chars-forward " \t"))
 
 (defun fingers-mark-with-pair-and-whitespace ()
-  (interactive)
   (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings-and-whitespace))
 
 ;;
@@ -352,53 +341,43 @@
 		 (fingers-copy-current-region kill)))))))
 
 (defun fingers-copy-char (&optional kill)
-  (interactive)
   (fingers-mark-char)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-char-and-whitespace (&optional kill)
-  (interactive)
   (fingers-mark-char-and-whitespace)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-word (&optional kill)
-  (interactive)
   (fingers-mark-word)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-word-and-whitespace (&optional kill)
-  (interactive)
   (fingers-mark-word-and-whitespace)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-symbol (&optional kill)
-  (interactive)
   (fingers-mark-symbol)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-symbol-and-whitespace (&optional kill)
-  (interactive)
   (fingers-mark-symbol-and-whitespace)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-until-end-of-line (&optional kill)
-  (interactive)
   (fingers-mark-until-end-of-line)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-whole-line (&optional kill)
-  (interactive)
   (fingers-mark-whole-line)
   (fingers-copy-current-region kill)
   (delete-char 1))
 
 (defun fingers-copy-inside-pair (&optional kill)
-  (interactive)
   (fingers-mark-inside-pair)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-with-pair (&optional kill)
-  (interactive)
   (fingers-mark-with-pair)
   (fingers-copy-current-region kill))
 
@@ -580,28 +559,23 @@
 (defvar fingers-mode-excluded-major-modes '(minibuffer-inactive-mode))
 
 (defun fingers-mode-activate ()
-  (interactive)
   (fingers-mode 1))
 
 (defun fingers-mode-deactivate ()
-  (interactive)
   (fingers-mode -1))
 
 (defun fingers-mode-maybe-activate ()
-  (interactive)
   (let ((should-activate (not (member major-mode fingers-mode-excluded-major-modes))))
     (when should-activate
       (fingers-mode-activate))))
 
 (defun fingers-mode-deactivate-globally ()
-  (interactive)
   (setq fingers-mode-active nil)
   (remove-hook 'after-change-major-mode-hook 'fingers-mode-maybe-activate)
   (mapc (lambda (buffer) (with-current-buffer buffer (fingers-mode-deactivate)))
         (buffer-list)))
 
 (defun fingers-mode-activate-globally ()
-  (interactive)
   (setq fingers-mode-active t)
   (add-hook 'after-change-major-mode-hook 'fingers-mode-maybe-activate)
   (mapc (lambda (buffer) (with-current-buffer buffer (fingers-mode-maybe-activate)))
