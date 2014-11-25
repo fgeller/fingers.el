@@ -33,10 +33,13 @@
 (defvar fingers-keyboard-layout-mapper 'identity "Mapping function from Workman to a different keyboard layout")
 (defvar fingers-selection-specifiers
   '((char . ?v)
+    (char-and-whitespace . ?V)
     (line . ?t)
     (line-rest . ?w)
     (word . ?h)
+    (word-and-whitespace . ?H)
     (symbol . ?r)
+    (symbol-and-whitespace . ?R)
     (inside-pair . ?s)
     (with-pair . ?a)
     (with-pair-and-whitespace . ?A))
@@ -201,6 +204,15 @@
   (while (not (fingers-looking-at-word))
     (left-char 1)))
 
+(defun fingers-set-mark-before-whitespace-and-return ()
+  (let ((start-position (point)))
+    (skip-chars-backward " \t")
+    (set-mark (point))
+    (goto-char start-position)))
+
+(defun fingers-skip-whitespace-forward ()
+  (skip-chars-forward " \t"))
+
 ;;
 ;; mark
 ;;
@@ -210,10 +222,13 @@
   (let ((next-key (read-key "Mark: ")))
     (cond
      ((= next-key (fingers-selection-specifier 'char)) (fingers-mark-char))
+     ((= next-key (fingers-selection-specifier 'char-and-whitespace)) (fingers-mark-char-and-whitespace))
      ((= next-key (fingers-selection-specifier 'line)) (fingers-mark-whole-line))
      ((= next-key (fingers-selection-specifier 'line-rest)) (fingers-mark-until-end-of-line))
      ((= next-key (fingers-selection-specifier 'word)) (fingers-mark-word))
+     ((= next-key (fingers-selection-specifier 'word-and-whitespace)) (fingers-mark-word-and-whitespace))
      ((= next-key (fingers-selection-specifier 'symbol)) (fingers-mark-symbol))
+     ((= next-key (fingers-selection-specifier 'symbol-and-whitespace)) (fingers-mark-symbol-and-whitespace))
      ((= next-key (fingers-selection-specifier 'inside-pair)) (fingers-mark-inside-pair))
      ((= next-key (fingers-selection-specifier 'with-pair)) (fingers-mark-with-pair))
      ((= next-key (fingers-selection-specifier 'with-pair-and-whitespace)) (fingers-mark-with-pair-and-whitespace))
@@ -224,19 +239,34 @@
   (set-mark (point))
   (forward-char 1))
 
+(defun fingers-mark-char-and-whitespace ()
+  (fingers-set-mark-before-whitespace-and-return)
+  (forward-char 1)
+  (fingers-skip-whitespace-forward))
+
 (defun fingers-mark-word ()
   (unless (fingers-looking-at-word) (fingers-beginning-of-word))
   (set-mark (point))
   (forward-word))
 
+(defun fingers-mark-word-and-whitespace ()
+  (unless (fingers-looking-at-word) (fingers-beginning-of-word))
+  (fingers-set-mark-before-whitespace-and-return)
+  (forward-word)
+  (fingers-skip-whitespace-forward))
+
 (defun fingers-mark-symbol ()
-  (interactive)
   (unless (fingers-looking-at-symbol) (fingers-beginning-of-symbol))
   (set-mark (point))
   (forward-symbol 1))
 
+(defun fingers-mark-symbol-and-whitespace ()
+  (unless (fingers-looking-at-symbol) (fingers-beginning-of-symbol))
+  (fingers-set-mark-before-whitespace-and-return)
+  (forward-symbol 1)
+  (fingers-skip-whitespace-forward))
+
 (defun fingers-mark-until-end-of-line ()
-  (interactive)
   (set-mark (point))
   (end-of-line))
 
@@ -299,10 +329,13 @@
 	(t (let ((next-key (read-key "Kill: ")))
 	     (cond
 	      ((= next-key (fingers-selection-specifier 'char)) (fingers-copy-char kill))
+	      ((= next-key (fingers-selection-specifier 'char-and-whitespace)) (fingers-copy-char-and-whitespace kill))
 	      ((= next-key (fingers-selection-specifier 'line)) (fingers-copy-whole-line kill))
 	      ((= next-key (fingers-selection-specifier 'line-rest)) (fingers-copy-until-end-of-line kill))
 	      ((= next-key (fingers-selection-specifier 'word)) (fingers-copy-word kill))
+	      ((= next-key (fingers-selection-specifier 'word-and-whitespace)) (fingers-copy-word-and-whitespace kill))
 	      ((= next-key (fingers-selection-specifier 'symbol)) (fingers-copy-symbol kill))
+	      ((= next-key (fingers-selection-specifier 'symbol-and-whitespace)) (fingers-copy-symbol-and-whitespace kill))
 	      ((= next-key (fingers-selection-specifier 'inside-pair)) (fingers-copy-inside-pair kill))
 	      ((= next-key (fingers-selection-specifier 'with-pair)) (fingers-copy-with-pair kill))
 	      ((= next-key (fingers-selection-specifier 'with-pair-and-whitespace)) (fingers-copy-with-pair-and-whitespace kill))
@@ -315,14 +348,29 @@
   (fingers-mark-char)
   (fingers-copy-current-region kill))
 
+(defun fingers-copy-char-and-whitespace (&optional kill)
+  (interactive)
+  (fingers-mark-char-and-whitespace)
+  (fingers-copy-current-region kill))
+
 (defun fingers-copy-word (&optional kill)
   (interactive)
   (fingers-mark-word)
   (fingers-copy-current-region kill))
 
+(defun fingers-copy-word-and-whitespace (&optional kill)
+  (interactive)
+  (fingers-mark-word-and-whitespace)
+  (fingers-copy-current-region kill))
+
 (defun fingers-copy-symbol (&optional kill)
   (interactive)
   (fingers-mark-symbol)
+  (fingers-copy-current-region kill))
+
+(defun fingers-copy-symbol-and-whitespace (&optional kill)
+  (interactive)
+  (fingers-mark-symbol-and-whitespace)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-until-end-of-line (&optional kill)
