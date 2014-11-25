@@ -448,12 +448,7 @@
 (defvar fingers-mode-x-map (fingers-mode-clean-map))
 (defvar fingers-mode-c-map (fingers-mode-clean-map))
 
-;;
-;; Main command mode map
-;;
-(defun fingers-reset-bindings ()
-  (interactive)
-  (fingers-define-keys fingers-keyboard-layout-mapper fingers-mode-map
+(defvar fingers-command-bindings
     `(
       ;; left hand -- manipulation
       ;;
@@ -525,13 +520,9 @@
 
       (SPC . fingers-mark)
       )
-    ))
-(fingers-reset-bindings)
+    "Main bindings in `fingers-mode-map'")
 
-;;
-;; x-map
-;;
-(fingers-define-keys 'identity fingers-mode-x-map
+(defvar fingers-x-bindings
   `(
     (b . switch-to-buffer)
     (c . save-buffers-kill-terminal)
@@ -546,19 +537,34 @@
     (1 . delete-other-windows)
     (2 . split-window-below)
     (3 . split-window-right)
-    ))
+    )
+  "Bindings for `fingers-mode-x-map'")
 
-;;
-;; c-map
-;;
-(fingers-define-keys 'identity fingers-mode-c-map
+(defvar fingers-c-bindings
   `(
     (b . ,(fingers-pass-events-command "C-c C-b"))
     (c . ,(fingers-pass-events-command "C-c C-c"))
     (f . ,(fingers-pass-events-command "C-c C-f"))
     (k . ,(fingers-pass-events-command "C-c C-k"))
     (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
-    ))
+    )
+  "Bindings for `fingers-mode-c-map'")
+
+;;
+;; Main command mode map
+;;
+(defun fingers-reset-bindings ()
+  (fingers-define-keys fingers-keyboard-layout-mapper
+		       fingers-mode-map
+		       fingers-command-bindings)
+  (fingers-define-keys 'identity
+		       fingers-mode-x-map
+		       fingers-x-bindings)
+  (fingers-define-keys 'identity
+		       fingers-mode-c-map
+		       fingers-c-bindings))
+
+(fingers-reset-bindings)
 
 ;;
 ;; Mode management
