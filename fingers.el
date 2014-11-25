@@ -186,22 +186,22 @@
       (fingers-move-point-to-pair-end-simple start)
     (fingers-move-point-to-balanced-end start end)))
 
-(defun fingers-looking-at-symbol ()
+(defun fingers-looking-at-symbol-p ()
   (interactive)
   (looking-at "\\_<"))
 
 (defun fingers-beginning-of-symbol ()
   (interactive)
-  (while (not (fingers-looking-at-symbol))
+  (while (not (fingers-looking-at-symbol-p))
     (left-char 1)))
 
-(defun fingers-looking-at-word ()
+(defun fingers-looking-at-word-p ()
   (interactive)
   (looking-at "\\<"))
 
 (defun fingers-beginning-of-word ()
   (interactive)
-  (while (not (fingers-looking-at-word))
+  (while (not (fingers-looking-at-word-p))
     (left-char 1)))
 
 (defun fingers-set-mark-before-whitespace-and-return ()
@@ -245,23 +245,23 @@
   (fingers-skip-whitespace-forward))
 
 (defun fingers-mark-word ()
-  (unless (fingers-looking-at-word) (fingers-beginning-of-word))
+  (unless (fingers-looking-at-word-p) (fingers-beginning-of-word))
   (set-mark (point))
   (forward-word))
 
 (defun fingers-mark-word-and-whitespace ()
-  (unless (fingers-looking-at-word) (fingers-beginning-of-word))
+  (unless (fingers-looking-at-word-p) (fingers-beginning-of-word))
   (fingers-set-mark-before-whitespace-and-return)
   (forward-word)
   (fingers-skip-whitespace-forward))
 
 (defun fingers-mark-symbol ()
-  (unless (fingers-looking-at-symbol) (fingers-beginning-of-symbol))
+  (unless (fingers-looking-at-symbol-p) (fingers-beginning-of-symbol))
   (set-mark (point))
   (forward-symbol 1))
 
 (defun fingers-mark-symbol-and-whitespace ()
-  (unless (fingers-looking-at-symbol) (fingers-beginning-of-symbol))
+  (unless (fingers-looking-at-symbol-p) (fingers-beginning-of-symbol))
   (fingers-set-mark-before-whitespace-and-return)
   (forward-symbol 1)
   (fingers-skip-whitespace-forward))
