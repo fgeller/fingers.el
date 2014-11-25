@@ -85,6 +85,12 @@
 	 (next-key-sequence (concat "M-" (string next-key))))
     (fingers-pass-events next-key-sequence)))
 
+(defun fingers-meta-control ()
+  (interactive)
+  (let* ((next-key (read-key "C-M-"))
+	 (next-key-sequence (concat "C-M-" (string next-key))))
+    (fingers-pass-events next-key-sequence)))
+
 ;;
 ;; Helpers for navigation
 ;;
@@ -471,6 +477,7 @@
       (t . fingers-kill)
       (T . fingers-copy)
       (g . fingers-meta)
+      (G . fingers-meta-control)
 
       ;; bottom row
       (z . repeat)
