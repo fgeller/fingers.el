@@ -556,6 +556,7 @@
     (b . ,(fingers-pass-events-command "C-c C-b"))
     (c . ,(fingers-pass-events-command "C-c C-c"))
     (f . ,(fingers-pass-events-command "C-c C-f"))
+    (k . ,(fingers-pass-events-command "C-c C-k"))
     (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
     ))
 
