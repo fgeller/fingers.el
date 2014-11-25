@@ -532,6 +532,7 @@
     (c . ,(fingers-pass-events-command "C-c C-c"))
     (f . ,(fingers-pass-events-command "C-c C-f"))
     (k . ,(fingers-pass-events-command "C-c C-k"))
+    (s . ,(fingers-pass-events-command "C-c C-s"))
     (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
     )
   "Bindings for `fingers-mode-c-map'")
