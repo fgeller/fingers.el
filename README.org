@@ -71,60 +71,56 @@
 
 ** Details
 
+   The following tables describe the current bindings when =fingers-mode= is
+   active. The commands are sometimes abbreviated for formatting, you can always
+   use =C-h k= to get the actual binding. Commands that are formatted like =a/b=
+   indicate that =b= is bound to the upper case version of the key that triggers
+   =a=.
+
 *** Left Hand: Navigation
 
-Workman layout:
+    Bindings:
 
-|---+---+---+---+---+---|
-| j | f | u | p | ; |   |
-|---+---+---+---+---+---|
-| y | n | e | o | i | ' |
-|---+---+---+---+---+---|
-| k | l | , | . |   |   |
-|---+---+---+---+---+---|
+    |---------+---------+----------+----------+--------+---------|
+    | 1st     | 2nd     | 3rd      | 4th      | 5th    | 6th     |
+    |---------+---------+----------+----------+--------+---------|
+    | apropos | regist* | search↓* | search↑* |        |         |
+    |---------+---------+----------+----------+--------+---------|
+    | bol/bob | ←/word  | ↓/page   | ↑/page   | →/word | eol/eob |
+    |---------+---------+----------+----------+--------+---------|
+    | grep    |         |          |          |        |         |
+    |---------+---------+----------+----------+--------+---------|
 
-Bindings:
-
-|---------------+---------------+-----------------+------------------+--------------+---------------|
-| 1st           | 2nd           | 3rd             | 4th              |  5th         |   6th         |
-|---------------+---------------+-----------------+------------------+--------------+---------------|
-| apropos       | register*     | search-forward* | search-backward* |              |               |
-|---------------+---------------+-----------------+------------------+--------------+---------------|
-| beg-of-line   | left-char     | next-line       | previous-line    | right-char   | end-of-line   |
-| beg-of-buffer | backward-word | page-down       | page-up          | forward-word | end-of-buffer |
-|---------------+---------------+-----------------+------------------+--------------+---------------|
-| grep          |               | ,               | .                |              |               |
-|---------------+---------------+-----------------+------------------+--------------+---------------|
-
- - =*= denotes prefixes
-   - =ff= jump-to-register
-   - =fn= point-to-register
-   - =ue= isearch-forward
-   - =uu= isearch-repeat-forward
-   - =uo= isearch-occur
-   - =po= isearch-backward
-   - =pp= isearch-repeat-backward
+    Prefixes are denoted by =*=
+     - =ff= jump-to-register
+     - =fn= point-to-register
+     - =ue= isearch-forward
+     - =uu= isearch-repeat-forward
+     - =uo= isearch-occur
+     - =po= isearch-backward
+     - =pp= isearch-repeat-backward
 
 *** Right Hand: Text manipulation
 
-Workman layout:
+    Bindings:
+    |----------+-----------+----------------+-----------+-----------|
+    | 1st      | 2nd       | 3rd            | 4th       | 5th       |
+    |----------+-----------+----------------+-----------+-----------|
+    |          | duplicate | query replace  | join line | open line |
+    |----------+-----------+----------------+-----------+-----------|
+    | surround | remove    | yank/-ring     | kill/copy | M-/C-M-   |
+    |----------+-----------+----------------+-----------+-----------|
+    | repeat   | x-map     | macro-rec/-end | c-map     | repl char |
+    |----------+-----------+----------------+-----------+-----------|
 
-|---+---+---+---+---|
-| q | d | r | w | b |
-|---+---+---+---+---|
-| a | s | h | t | g |
-|---+---+---+---+---|
-| z | x | m | c | v |
-|---+---+---+---+---|
+    Region specifiers:
 
-Bindings:
-
-|---------------+----------------+----------------+-----------+---------------|
-|               | duplicate-line | query-replace  | join-line | open-line     |
-|---------------+----------------+----------------+-----------+---------------|
-| surround-pair | remove-pair    | yank           | kill      | meta*         |
-|               |                | show-kill-ring | copy      | meta-control* |
-|---------------+----------------+----------------+-----------+---------------|
-| repeat        | x-map          | macro-start    | c-map     | replace-char  |
-|               |                | macro-end      |           |               |
-|---------------+----------------+----------------+-----------+---------------|
+    |--------------+---------+-----------+---------------+---------|
+    | 1st          | 2nd     | 3rd       | 4th           | 5th     |
+    |--------------+---------+-----------+---------------+---------|
+    |              |         | symbol/+w | till line end |         |
+    |--------------+---------+-----------+---------------+---------|
+    | with pair/+w | in pair | word/+w   | line          |         |
+    |--------------+---------+-----------+---------------+---------|
+    |              |         |           |               | char/+w |
+    |--------------+---------+-----------+---------------+---------|
