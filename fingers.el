@@ -582,13 +582,15 @@
   (setq fingers-mode-active nil)
   (remove-hook 'after-change-major-mode-hook 'fingers-mode-maybe-activate)
   (mapc (lambda (buffer) (with-current-buffer buffer (fingers-mode-deactivate)))
-        (buffer-list)))
+        (buffer-list))
+  (run-hooks 'fingers-mode-deactivated-hook))
 
 (defun fingers-mode-activate-globally ()
   (setq fingers-mode-active t)
   (add-hook 'after-change-major-mode-hook 'fingers-mode-maybe-activate)
   (mapc (lambda (buffer) (with-current-buffer buffer (fingers-mode-maybe-activate)))
-        (buffer-list)))
+        (buffer-list))
+  (run-hooks 'fingers-mode-activated-hook))
 
 (defun fingers-mode-toggle-globally ()
   (interactive)
