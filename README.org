@@ -68,3 +68,54 @@
    - Invoke Meta bindings (=M-=) via =g= prefix. For example: =g;= to trigger
      =M-;= which is commonly bound to =comment-dwim=. Or =gq= to trigger =M-q=
      which is commonly bound to =fill-paragraph=.
+
+** Details
+
+*** Left Hand
+
+|---+---+---+---+---+---|
+| j | f | u | p | ; |   |
+|---+---+---+---+---+---|
+| y | n | e | o | i | ' |
+|---+---+---+---+---+---|
+| k | l | , | . |   |   |
+|---+---+---+---+---+---|
+
+
+|---------------+---------------+-----------------+------------------+--------------+---------------|
+| apropos       | register*     | search-forward* | search-backward* |              |               |
+|---------------+---------------+-----------------+------------------+--------------+---------------|
+| beg-of-line   | left-char     | next-line       | previous-line    | right-char   | end-of-line   |
+| beg-of-buffer | backward-word | page-down       | page-up          | forward-word | end-of-buffer |
+|---------------+---------------+-----------------+------------------+--------------+---------------|
+| grep          |               | ,               | .                |              |               |
+|---------------+---------------+-----------------+------------------+--------------+---------------|
+
+ - =*= denotes prefixes
+   - =ff= jump-to-register
+   - =fn= point-to-register
+   - =ue= isearch-forward
+   - =uu= isearch-repeat-forward
+   - =uo= isearch-occur
+   - =po= isearch-backward
+   - =pp= isearch-repeat-backward
+
+*** Right Hand
+
+|---+---+---+---+---|
+| q | d | r | w | b |
+|---+---+---+---+---|
+| a | s | h | t | g |
+|---+---+---+---+---|
+| z | x | m | c | v |
+|---+---+---+---+---|
+
+|---------------+----------------+----------------+-----------+---------------|
+|               | duplicate-line | query-replace  | join-line | open-line     |
+|---------------+----------------+----------------+-----------+---------------|
+| surround-pair | remove-pair    | yank           | kill      | meta*         |
+|               |                | show-kill-ring | copy      | meta-control* |
+|---------------+----------------+----------------+-----------+---------------|
+| repeat        | x-map          | macro-start    | c-map     | replace-char  |
+|               |                | macro-end      |           |               |
+|---------------+----------------+----------------+-----------+---------------|
