@@ -57,11 +57,11 @@
 
    - Prefers ease of key press over mnemonics.
 
-   - Basic navigation all on left home row: beginning of line, left, down, up,
+   - Basic navigation all on right home row: beginning of line, left, down, up,
      right, end of line. Shift adds beginning and end of buffer, forward and
      backward word and page up and down.
 
-   - Basic text manipulation on right home row: enclose in pair, remove
+   - Basic text manipulation on left home row: enclose in pair, remove
      surrounding pair, yank, kill (with selection specifiers for word, symbol,
      whole line, between pairs, with pairs and additional ones that include the
      surrounding whitespace).
@@ -84,7 +84,7 @@
    indicate that =b= is bound to the upper case version of the key that triggers
    =a=.
 
-*** Left Hand: Navigation
+*** Right Hand: Navigation
 
     Bindings:
 
@@ -107,7 +107,7 @@
      - =po= isearch-backward
      - =pp= isearch-repeat-backward
 
-*** Right Hand: Text manipulation
+*** Left Hand: Text manipulation
 
     Bindings:
     |----------+-----------+----------------+-----------+-----------|
