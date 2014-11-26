@@ -1,6 +1,7 @@
 * fingers.el
 
-  Modal editing for Emacs.
+  Modal text editing for Emacs: A collection of key bindings with ergonomics in
+  mind bundled with basic text manipulation commands.
 
 ** Installation
 
@@ -54,20 +55,26 @@
 
    - Easy navigation via right hand, basic text manipulation via left hand
 
+   - Prefers ease of key press over mnemonics.
+
    - Basic navigation all on left home row: beginning of line, left, down, up,
-     right, end of line.
+     right, end of line. Shift adds beginning and end of buffer, forward and
+     backward word and page up and down.
 
    - Basic text manipulation on right home row: enclose in pair, remove
      surrounding pair, yank, kill (with selection specifiers for word, symbol,
-     whole line, between pairs, with pairs, with pairs and whitespace).
-
-   - Prefers ease of key press over mnemonics.
-
-   - Based on the Workman keyboard layout, supports basic mapping to other layouts
+     whole line, between pairs, with pairs and additional ones that include the
+     surrounding whitespace).
 
    - Invoke Meta bindings (=M-=) via =g= prefix. For example: =g;= to trigger
      =M-;= which is commonly bound to =comment-dwim=. Or =gq= to trigger =M-q=
      which is commonly bound to =fill-paragraph=.
+
+   - Based on the Workman keyboard layout, supports basic mapping to other
+     layouts
+
+   - Common =C-x= and =C-c= bindings still available by passing events through
+     to underlying modes.
 
 ** Details
 
