@@ -98,25 +98,25 @@
   (interactive)
   (fingers-beginning-of-word)
   (forward-word)
-  (search-forward (thing-at-point 'word))
+  (search-forward-regexp (concat "\\<" (regexp-quote (thing-at-point 'word)) "\\>"))
   (fingers-beginning-of-word))
 
 (defun fingers-move-to-next-symbol-occurrence ()
   (interactive)
   (fingers-beginning-of-symbol)
   (forward-symbol 1)
-  (search-forward (thing-at-point 'symbol))
+  (search-forward-regexp (concat "\\_<" (regexp-quote (thing-at-point 'symbol)) "\\_>"))
   (fingers-beginning-of-symbol))
 
 (defun fingers-move-to-previous-word-occurrence ()
   (interactive)
   (fingers-beginning-of-word)
-  (search-backward (thing-at-point 'word)))
+  (search-backward-regexp (concat "\\<" (regexp-quote (thing-at-point 'word)) "\\>")))
 
 (defun fingers-move-to-previous-symbol-occurrence ()
   (interactive)
   (fingers-beginning-of-symbol)
-  (search-backward (thing-at-point 'symbol)))
+  (search-backward-regexp (concat "\\_<" (regexp-quote (thing-at-point 'symbol)) "\\_>")))
 
 ;;
 ;; Helpers for manipulation
