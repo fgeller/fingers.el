@@ -71,7 +71,7 @@
      which is commonly bound to =fill-paragraph=.
 
    - Based on the Workman keyboard layout, supports basic mapping to other
-     layouts
+     layouts (Qwerty included).
 
    - Common =C-x= and =C-c= bindings still available by passing events through
      to underlying modes.
@@ -91,14 +91,14 @@
     |---------+-----------+--------------+------------+------------+---------|
     | 1st     | 2nd       | 3rd          | 4th        | 5th        | 6th     |
     |---------+-----------+--------------+------------+------------+---------|
-    | apropos | regist*   | search down* | search up* |            |         |
+    | apropos | register* | search down* | search up* |            |         |
     |---------+-----------+--------------+------------+------------+---------|
     | bol/bob | left/word | down/page    | up/page    | right/word | eol/eob |
     |---------+-----------+--------------+------------+------------+---------|
     | grep    |           |              |            |            |         |
     |---------+-----------+--------------+------------+------------+---------|
 
-    Prefixes are denoted by =*=
+    Prefixes are denoted by =*=. Examples for Workman layout:
      - =ff= jump-to-register
      - =fn= point-to-register
      - =ue= isearch-forward
