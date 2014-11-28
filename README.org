@@ -71,7 +71,7 @@
      which is commonly bound to =fill-paragraph=.
 
    - Based on the Workman keyboard layout, supports basic mapping to other
-     layouts (Qwerty included).
+     layouts (Qwerty and Neo included).
 
    - Common =C-x= and =C-c= bindings still available by passing events through
      to underlying modes.
