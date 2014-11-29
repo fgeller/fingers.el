@@ -1,7 +1,7 @@
 * fingers.el
 
-  Modal text editing for Emacs: A collection of key bindings and basic text
-  manipulation commands.
+  Modal text editing for Emacs: A collection of key bindings for navigation and
+  text manipulation.
 
 ** Installation
 
@@ -11,21 +11,7 @@
      (require 'fingers)
    #+end_src
 
-   And then add additional bindings as needed. For example to trigger
-   =magit-status= via =xg= in fingers-mode:
-
-   #+begin_src emacs-lisp
-     (define-key fingers-mode-x-map (kbd "g") 'magit-status)
-   #+end_src
-
-   Or to trigger =ag-project= via =k= in fingers-mode:
-
-   #+begin_src emacs-lisp
-     (define-key fingers-mode-map (kbd "k") 'ag-project)
-   #+end_src
-
-   For Qwerty users, use the following to change the basic mappings (not for =x=
-   and =c= prefix):
+   For Qwerty users, add the following to change the main bindings:
 
    #+begin_src emacs-lisp
      (require 'fingers-qwerty)
@@ -45,57 +31,76 @@
              (with-pair-and-whitespace . ?A)))
    #+end_src
 
-** Description
+   Refer to =fingers-qwerty.el= and =fingers-neo.el= for more information about
+   the mappings.
 
-   - Based on ideas found in
-     - boon: https://github.com/jyp/boon
-     - god-mode: https://github.com/chrisdone/god-mode
+   Then you should bind the function =fingers-mode-toggle-globally= to enable
+   and disable =fingers-mode= globally. You can bind this function to any
+   convenient key sequence, for example, I use
+   [[http://www.emacswiki.org/emacs/KeyChord][key-chord]] to toggle it via =oe=,
+   where =jk= would be better suited for Qwerty users:
 
-   - Minor mode that reduces usage of modifiers like Control and Meta
+    #+begin_src emacs-lisp
+      (key-chord-define-global "oe" 'fingers-mode-toggle-globally)
+    #+end_src
 
-   - Easy navigation via right hand, basic text manipulation via left hand
-
-   - Prefers ease of key press over mnemonics.
-
-   - Basic navigation all on right home row: beginning of line, left, down, up,
-     right, end of line. Shift adds beginning and end of buffer, forward and
-     backward word and page up and down.
-
-   - Basic text manipulation on left home row: enclose in pair, remove
-     surrounding pair, yank, kill (with region specifiers for word, symbol,
-     whole line, between pairs, with pairs and additional ones that include the
-     surrounding whitespace).
-
-   - Invoke Meta bindings (=M-=) via =g= prefix. For example: =g;= to trigger
-     =M-;= which is commonly bound to =comment-dwim=. Or =gq= to trigger =M-q=
-     which is commonly bound to =fill-paragraph=.
-
-   - Based on the Workman keyboard layout, supports basic mapping to other
-     layouts (Qwerty and Neo included).
-
-   - Common =C-x= and =C-c= bindings still available by passing events through
-     to underlying modes.
+    Continue reading for more information on the available bindings.
 
 ** Details
 
-   The following tables describe the current bindings when =fingers-mode= is
-   active. The commands are sometimes abbreviated for formatting, you can always
-   use =C-h k= to get the actual binding.
+   =fingers-mode= is a global minor mode that introduces key bindings for
+   navigation and text manipulation. =fingers-mode= relies on modal editing to
+   reduce the usage of modifiers like Control and Meta. It introduces a new
+   keymap to trigger commands without the need for modifiers and can easily be
+   toggled to fall back to inserting text as usually in Emacs. =fingers-mode= is
+   not activated in the minibuffer.
+
+   Navigation and and text manipulation is split between the right and left hand
+   respectively. The following tables describe the bindings when =fingers-mode=
+   is active. The commands are sometimes abbreviated for formatting, you can
+   always use =C-h k= to get the actual binding.
+
+   The tables are based on the [[http://www.workmanlayout.com/blog/][Workman]]
+   keyboard layout, but there are mappings available for
+   [[https://en.wikipedia.org/wiki/QWERTY][Qwerty]] and
+   [[http://www.neo-layout.org/][Neo]]. The mappings modify the main
+   =fingers-mode-map= where the layout is based on ease of key presses rather
+   than mnemonics.
+
+   The bindings available in the =x-map= and =c-map= are usually mnemonics and
+   based on the standard Emacs bindings, so they aren't modified by the mappings
+   by default.
+
+   While =fingers-mode= aims to offer convenient bindings for most cases, it does
+   not modify the underlying bindings. You can always fall back to regular
+   bindings like =C-n= for moving to the next line.
 
 *** Left Hand: Text manipulation
 
-    Bindings:
-    |------------+-------------+-------------------------+---------------+-------------|
-    | *1*:         | *2*:          | *3*:                      | *4*:            | *5*:          |
-    |------------+-------------+-------------------------+---------------+-------------|
-    | *q*:         | *d*:duplicate | *r*:query replace         | *w*:join line   | *b*:open line |
-    |------------+-------------+-------------------------+---------------+-------------|
-    | *a*:surround | *s*:remove    | *h*:yank *H*:ring           | *t*:kill *T*:copy | *g*:M- *G*:C-M- |
-    |------------+-------------+-------------------------+---------------+-------------|
-    | *z*:repeat   | *x*:x-map     | *m*:macro-rec *M*:macro-end | *c*:c-map       | *v*:repl char |
-    |------------+-------------+-------------------------+---------------+-------------|
+    Available bindings on the left hand:
 
-    Region specifiers:
+    |------------+------------------+--------------------------+---------------+-------------|
+    | *1*:         | *2*:               | *3*:                       | *4*:            | *5*:          |
+    |------------+------------------+--------------------------+---------------+-------------|
+    | *q*:         | *d*:duplicate line | *r*:query replace *R*:regexp | *w*:join line   | *b*:open line |
+    |------------+------------------+--------------------------+---------------+-------------|
+    | *a*:surround | *s*:splice         | *h*:yank *H*:show-kill-ring  | *t*:kill *T*:copy | *g*:M- *G*:C-M- |
+    |------------+------------------+--------------------------+---------------+-------------|
+    | *z*:repeat   | *x*:x-map          | *m*:macro-rec *M*:macro-end  | *c*:c-map       | *v*:repl char |
+    |------------+------------------+--------------------------+---------------+-------------|
+
+    The home row binds common yanking =h=, copying =H= and there are also
+    functions to add a pair of surrounding strings =a= or remove them similar to
+    paredit's splice to =s=. These commands expect a region as an argument that
+    can either be active prior to triggering the command or be selected
+    afterwards. Regular navigation commands on the right hand can be used to
+    make a selection but also a set of bindings on the left hand allow to
+    quickly specify a region. There are bindings available for selecting the
+    char =v=, word =h=, symbol =t= or line =g= under point as well as the region
+    between =s= or with an enclosing pair =a=. Upper case versions trigger
+    selections with surrounding whitespace or from point till line end for =G=.
+
+    The following table lists the region specifiers on the left hand:
 
     |------------------+-----------+-------------+---------------+------------------------|
     | *1*:               | *2*:        | *3*:          | *4*:            | *5*:                     |
@@ -107,9 +112,88 @@
     | *z*:               | *x*:        | *m*:          | *c*:            | *v*:char *V*:+w             |
     |------------------+-----------+-------------+---------------+------------------------|
 
+    Additionally, for pair selection you can double press the command and
+    =fingers-mode= will identify the next pair that starts left of point. For
+    example if =|= represents point:
+
+    #+begin_src text
+      def greet(): Unit = {
+        println("Hello, |world")
+      }
+    #+end_src
+
+    Pressing =ss= (for splicing) will yield:
+
+    #+begin_src text
+      def greet(): Unit = {
+        println(|Hello, world)
+      }
+    #+end_src
+
+    Similarly, pressing =taa= will yield:
+
+    #+begin_src text
+      def greet(): Unit = {
+        println(|)
+      }
+    #+end_src
+
+    While you can select the function body via =ta{=:
+
+    #+begin_src text
+      def greet(): Unit = |
+    #+end_src
+
+    Notice that the double key press is simply looking to the left of point for
+    the next character that is the start of a known pair, it does not look
+    whether the character has a well balanced matching end character. Selecting
+    a region based on the pairs =()=, ={}=, =[]= and =<>= will attempt to find
+    the matching end character. For example:
+
+    #+begin_src text
+      (defun hello-there ()
+        (interactive)
+        (message "1 + |1 + 2 + 3 = %s" (+ 1 1 2 3)))
+    #+end_src
+
+    Pressing =ts(= will yield:
+
+    #+begin_src text
+      (defun hello-there ()
+        (interactive)
+        (|))
+    #+end_src
+
+    Or for:
+
+    #+begin_src text
+      (defun hello-there| ()
+        (interactive)
+        (message "1 + 1 + 2 + 3 = %s" (+ 1 1 2 3)))
+    #+end_src
+
+    Pressing =ta(= kill then entire function definition and  yield:
+
+    #+begin_src text
+      |
+    #+end_src
+
+    All of these manipulation commands are text based rather than identifying
+    syntactic components in the buffer. The goal are generally applicable
+    commands for text manipulation, rather than major-mode specific ones.
+
+    While many of these bindings are specific to =fingers-mode=, many common
+    bindings are easily available as well. Bindings that are prefixed by =C-x=
+    or =C-c= are available by pressing =x= or =c= respectively. For example, to
+    save the current buffer, you can press =xs= rather than =C-x C-s=.  Modify
+    =fingers-x-bindings= and =fingers-c-bindings= if a common binding for either
+    is missing. In addition, similar to god-mode, =g= and =G= bind meta prefixes
+    =M-= and =C-M-= respectively. So pressing =g;= is like pressing =M-;= and
+    triggers =comment-dwim=.
+
 *** Right Hand: Navigation
 
-    Bindings:
+    Available bindings on the right hand, prefixes are marked by =(p)=:
 
     |-------------+---------------+------------------+----------------+----------------+-----------------|
     | *6*:          | *7*:            | *8*:               | *9*:             | *0*:             | *-*:              |
@@ -121,12 +205,79 @@
     | *k*:grep      | *l*:            | *,*:             | *.*:             | */*:             |                 |
     |-------------+---------------+------------------+----------------+----------------+-----------------|
 
-    Prefixes are denoted by =(p)=. Examples for Workman layout:
-     - =ff= jump-to-register
-     - =fn= point-to-register
-     - =ue= isearch-forward
-     - =uu= isearch-repeat-forward
-     - =uo= isearch-occur
-     - =po= isearch-backward
-     - =pp= isearch-repeat-backward
+    Regular cursor motion is available on the home row via bindings that mirror
+    Vim's =hjkl= plus additional bindings for jumping to the beginning and end
+    of the current line respectively. Upper case variants increase the jump
+    range. For example: =n= triggers =left-char= and =N= triggers
+    =backward-word=, or =y= to jump to the beginning of the line, =Y= to jump to
+    the beginning of the buffer.
 
+    The top row introduces several prefixes to make use of registers and
+    isearch. For registers, you can store a point in register =a= by pressing
+    =fna= and return to it by pressing =ffa=. Supplying a prefix works as
+    regularly. To store the current window configuration in =b= you can use =C-u
+    ffb=.
+
+    Middle and ring finger start prefixes for searching down =u= and up =p=. To
+    start a search from point forward, press =ue= and enter the search string
+    (=po= for backwards search). Exit isearch via =RET= and continue searching
+    downward via =uu= or upward via =pp=. Alternatively you can press =uo= to
+    trigger =occur= for the current search string. Additionally you can use =ut=
+    and =pt= to jump to the next or previous occurrence of the symbol under
+    point. For jumping to occurrences of the word under point you can use =uh=
+    and =ph= respectively.
+
+** Extensions
+
+*** Third party libraries
+
+   =fingers-mode= has no external requirements, it only loads =thingatpt= which
+   is bundled with GNU Emacs. But I personally use several extensions for which
+   I either use unbound keys or replace existing bindings. For example, I
+   replace the builtin functionality for =query-replace= with
+   [[https://github.com/syohex/emacs-anzu][anzu]]'s version that offers
+   immediate visual feedback:
+
+   #+begin_src emacs-lisp
+     (define-key fingers-mode-map (kbd "r") 'anzu-query-replace)
+     (define-key fingers-mode-map (kbd "R") 'anzu-query-replace-regexp)
+   #+end_src
+
+   Or I use [[https://github.com/emacs-helm/helm][helm]] to replace =find-file=
+   or =execute-extended-command= via:
+
+   #+begin_src emacs-lisp
+     (define-key fingers-mode-x-map (kbd "f") 'helm-find-files)
+     (define-key fingers-mode-x-map (kbd "x") 'helm-M-x)
+   #+end_src
+
+   You can find more of my customizations in my
+   [[https://github.com/fgeller/emacs.d/blob/master/fingers.org][configuration]].
+
+*** Visual feedback
+
+     You can use the following snippet to color the mode-line to indicate
+     whether =fingers-mode= is active:
+
+     #+begin_src emacs-lisp
+       (defun fingers-mode-visual-toggle ()
+         (interactive)
+         (let ((faces-to-toggle '(mode-line mode-line-inactive))
+               (enabled-color (if terminal-p "gray" "#e8e8e8"))
+               (disabled-color (if terminal-p "green" "#a1b56c")))
+           (cond (fingers-mode-active
+                  (mapcar (lambda (face) (set-face-background face enabled-color))
+                          faces-to-toggle))
+                 (t
+                  (mapcar (lambda (face) (set-face-background face disabled-color))
+                          faces-to-toggle)))))
+
+       (add-hook 'fingers-mode-activated-hook 'fingers-mode-visual-toggle)
+       (add-hook 'fingers-mode-deactivated-hook 'fingers-mode-visual-toggle)
+     #+end_src
+
+** References
+
+   =fingers-mode= is based on excellent ideas found in
+   [[https://github.com/jyp/boon][boon]] and
+   [[https://github.com/chrisdone/god-mode][god-mode]].
