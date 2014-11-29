@@ -551,6 +551,8 @@
     (1 . delete-other-windows)
     (2 . split-window-below)
     (3 . split-window-right)
+    (50 . delete-frame)
+    (52 . make-frame-command)
     )
   "Bindings for `fingers-mode-x-map'")
 
