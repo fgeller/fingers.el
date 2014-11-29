@@ -34,9 +34,9 @@
    Refer to =fingers-qwerty.el= and =fingers-neo.el= for more information about
    the mappings.
 
-   Then you should bind the function =fingers-mode-toggle-globally= to enable
+   Next you should bind the function =fingers-mode-toggle-globally= to enable
    and disable =fingers-mode= globally. You can bind this function to any
-   convenient key sequence, for example, I use
+   convenient key sequence. For example, I use
    [[http://www.emacswiki.org/emacs/KeyChord][key-chord]] to toggle it via =oe=,
    where =jk= would be better suited for Qwerty users:
 
@@ -49,11 +49,18 @@
 ** Details
 
    =fingers-mode= is a global minor mode that introduces key bindings for
-   navigation and text manipulation. =fingers-mode= relies on modal editing to
-   reduce the usage of modifiers like Control and Meta. It introduces a new
-   keymap to trigger commands without the need for modifiers and can easily be
-   toggled to fall back to inserting text as usually in Emacs. =fingers-mode= is
-   not activated in the minibuffer.
+   navigation and text manipulation. It relies on modal editing to reduce the
+   usage of modifiers like Control and Meta. It introduces a new keymap to
+   trigger commands without the need for modifiers and can easily be toggled to
+   fall back to inserting text as usually in Emacs.
+
+   =fingers-mode= is activated for every buffer except the minibuffer. While
+   this works best for me, you might want to exclude additional major modes like
+   =magit=:
+
+   #+begin_src emacs-lisp
+     (add-to-list 'fingers-mode-excluded-major-modes 'magit-status-mode)
+   #+end_src
 
    Navigation and and text manipulation is split between the right and left hand
    respectively. The following tables describe the bindings when =fingers-mode=

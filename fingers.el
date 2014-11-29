@@ -609,8 +609,10 @@
 ;;
 ;; Mode management
 ;;
-(defvar fingers-mode-active nil)
-(defvar fingers-mode-excluded-major-modes '(minibuffer-inactive-mode))
+(defvar fingers-mode-active nil
+  "Global flag to indicate whether fingers-mode is active.")
+(defvar fingers-mode-excluded-major-modes '(minibuffer-inactive-mode)
+  "List of major-modes for which fingers-mode should not be activated.")
 
 (defun fingers-mode-activate ()
   (fingers-mode 1))
