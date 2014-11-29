@@ -555,6 +555,7 @@
     (f . find-file)
     (h . mark-whole-buffer)
     (k . kill-buffer)
+    (me . eshell)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
     (vd . vc-diff)
