@@ -103,13 +103,13 @@
 
 (defun fingers-meta ()
   (interactive)
-  (let* ((next-key (read-key "M-"))
+  (let* ((next-key (read-char "M-"))
 	 (next-key-sequence (concat "M-" (string next-key))))
     (fingers-pass-events next-key-sequence)))
 
 (defun fingers-meta-control ()
   (interactive)
-  (let* ((next-key (read-key "C-M-"))
+  (let* ((next-key (read-char "C-M-"))
 	 (next-key-sequence (concat "C-M-" (string next-key))))
     (fingers-pass-events next-key-sequence)))
 
@@ -172,7 +172,7 @@
     (yank)))
 
 (defun fingers-dispatch-with-pair (target &optional default)
-  (let ((next-key (read-key "Pair start character: ")))
+  (let ((next-key (read-char "Pair start character: ")))
     (cond ((= next-key ?\() (funcall target "(" ")"))
           ((= next-key ?\{) (funcall target "{" "}"))
           ((= next-key ?\[) (funcall target "[" "]"))
@@ -245,7 +245,7 @@
 
 (defun fingers-mark ()
   (interactive)
-  (let ((next-key (read-key "Mark: ")))
+  (let ((next-key (read-char "Mark: ")))
     (cond
      ((= next-key (fingers-selection-specifier 'char)) (fingers-mark-char))
      ((= next-key (fingers-selection-specifier 'char-and-whitespace)) (fingers-mark-char-and-whitespace))
@@ -345,7 +345,7 @@
 (defun fingers-copy (&optional kill)
   (interactive)
   (cond ((region-active-p) (fingers-copy-current-region kill))
-	(t (let ((next-key (read-key "Kill: ")))
+	(t (let ((next-key (read-char "Kill: ")))
 	     (cond
 	      ((= next-key (fingers-selection-specifier 'char)) (fingers-copy-char kill))
 	      ((= next-key (fingers-selection-specifier 'char-and-whitespace)) (fingers-copy-char-and-whitespace kill))
