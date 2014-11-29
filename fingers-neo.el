@@ -34,7 +34,7 @@
 ;; (setq fingers-keyboard-layout-mapper 'fingers-workman-to-neo)
 ;; (fingers-reset-bindings)
 ;;
-;; (setq fingers-selection-specifiers
+;; (setq fingers-region-specifiers
 ;;   '((char . ?z)
 ;;     (char-and-whitespace . ?Z)
 ;;     (line . ?o)

@@ -31,7 +31,7 @@
      (require 'fingers-qwerty)
      (setq fingers-keyboard-layout-mapper 'fingers-workman-to-qwerty)
      (fingers-reset-bindings)
-     (setq fingers-selection-specifiers
+     (setq fingers-region-specifiers
            '((char . ?b)
              (char-and-whitespace . ?B)
              (line . ?g)
@@ -62,7 +62,7 @@
      backward word and page up and down.
 
    - Basic text manipulation on left home row: enclose in pair, remove
-     surrounding pair, yank, kill (with selection specifiers for word, symbol,
+     surrounding pair, yank, kill (with region specifiers for word, symbol,
      whole line, between pairs, with pairs and additional ones that include the
      surrounding whitespace).
 

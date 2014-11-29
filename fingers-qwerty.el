@@ -34,7 +34,7 @@
 ;; (setq fingers-keyboard-layout-mapper 'fingers-workman-to-qwerty)
 ;; (fingers-reset-bindings)
 ;;
-;; (setq fingers-selection-specifiers
+;; (setq fingers-region-specifiers
 ;;   '((char . ?b)
 ;;     (char-and-whitespace . ?B)
 ;;     (line . ?g)

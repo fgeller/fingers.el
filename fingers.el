@@ -33,7 +33,7 @@
 ;;
 
 ;;
-;; Selection keys
+;; Region keys
 ;;
 ;; v: char
 ;; V: char and surrounding whitespace
@@ -55,7 +55,7 @@
 ;;
 
 (defvar fingers-keyboard-layout-mapper 'identity "Mapping function from Workman to a different keyboard layout")
-(defvar fingers-selection-specifiers
+(defvar fingers-region-specifiers
   '((char . ?v)
     (char-and-whitespace . ?V)
     (line . ?g)
@@ -67,10 +67,10 @@
     (inside-pair . ?s)
     (with-pair . ?a)
     (with-pair-and-whitespace . ?A))
-  "Mapping from selection type to identifier key")
+  "Mapping from region type to identifier key")
 
-(defun fingers-selection-specifier (type)
-  (cdr (assoc type fingers-selection-specifiers)))
+(defun fingers-region-specifier (type)
+  (cdr (assoc type fingers-region-specifiers)))
 
 (defun fingers-pass-events (kbd-string)
   "Helper to pass keyboard events through to shadowed maps. Based on `boon-push-events'"
@@ -264,17 +264,17 @@
   (interactive)
   (let ((next-key (read-char "Mark: ")))
     (cond
-     ((= next-key (fingers-selection-specifier 'char)) (fingers-mark-char))
-     ((= next-key (fingers-selection-specifier 'char-and-whitespace)) (fingers-mark-char-and-whitespace))
-     ((= next-key (fingers-selection-specifier 'line)) (fingers-mark-whole-line))
-     ((= next-key (fingers-selection-specifier 'line-rest)) (fingers-mark-until-end-of-line))
-     ((= next-key (fingers-selection-specifier 'word)) (fingers-mark-word))
-     ((= next-key (fingers-selection-specifier 'word-and-whitespace)) (fingers-mark-word-and-whitespace))
-     ((= next-key (fingers-selection-specifier 'symbol)) (fingers-mark-symbol))
-     ((= next-key (fingers-selection-specifier 'symbol-and-whitespace)) (fingers-mark-symbol-and-whitespace))
-     ((= next-key (fingers-selection-specifier 'inside-pair)) (fingers-mark-inside-pair))
-     ((= next-key (fingers-selection-specifier 'with-pair)) (fingers-mark-with-pair))
-     ((= next-key (fingers-selection-specifier 'with-pair-and-whitespace)) (fingers-mark-with-pair-and-whitespace))
+     ((= next-key (fingers-region-specifier 'char)) (fingers-mark-char))
+     ((= next-key (fingers-region-specifier 'char-and-whitespace)) (fingers-mark-char-and-whitespace))
+     ((= next-key (fingers-region-specifier 'line)) (fingers-mark-whole-line))
+     ((= next-key (fingers-region-specifier 'line-rest)) (fingers-mark-until-end-of-line))
+     ((= next-key (fingers-region-specifier 'word)) (fingers-mark-word))
+     ((= next-key (fingers-region-specifier 'word-and-whitespace)) (fingers-mark-word-and-whitespace))
+     ((= next-key (fingers-region-specifier 'symbol)) (fingers-mark-symbol))
+     ((= next-key (fingers-region-specifier 'symbol-and-whitespace)) (fingers-mark-symbol-and-whitespace))
+     ((= next-key (fingers-region-specifier 'inside-pair)) (fingers-mark-inside-pair))
+     ((= next-key (fingers-region-specifier 'with-pair)) (fingers-mark-with-pair))
+     ((= next-key (fingers-region-specifier 'with-pair-and-whitespace)) (fingers-mark-with-pair-and-whitespace))
      (t (set-mark (point))
 	(fingers-pass-events (string next-key))))))
 
@@ -364,17 +364,17 @@
   (cond ((region-active-p) (fingers-copy-current-region kill))
 	(t (let ((next-key (read-char "Kill: ")))
 	     (cond
-	      ((= next-key (fingers-selection-specifier 'char)) (fingers-copy-char kill))
-	      ((= next-key (fingers-selection-specifier 'char-and-whitespace)) (fingers-copy-char-and-whitespace kill))
-	      ((= next-key (fingers-selection-specifier 'line)) (fingers-copy-whole-line kill))
-	      ((= next-key (fingers-selection-specifier 'line-rest)) (fingers-copy-until-end-of-line kill))
-	      ((= next-key (fingers-selection-specifier 'word)) (fingers-copy-word kill))
-	      ((= next-key (fingers-selection-specifier 'word-and-whitespace)) (fingers-copy-word-and-whitespace kill))
-	      ((= next-key (fingers-selection-specifier 'symbol)) (fingers-copy-symbol kill))
-	      ((= next-key (fingers-selection-specifier 'symbol-and-whitespace)) (fingers-copy-symbol-and-whitespace kill))
-	      ((= next-key (fingers-selection-specifier 'inside-pair)) (fingers-copy-inside-pair kill))
-	      ((= next-key (fingers-selection-specifier 'with-pair)) (fingers-copy-with-pair kill))
-	      ((= next-key (fingers-selection-specifier 'with-pair-and-whitespace)) (fingers-copy-with-pair-and-whitespace kill))
+	      ((= next-key (fingers-region-specifier 'char)) (fingers-copy-char kill))
+	      ((= next-key (fingers-region-specifier 'char-and-whitespace)) (fingers-copy-char-and-whitespace kill))
+	      ((= next-key (fingers-region-specifier 'line)) (fingers-copy-whole-line kill))
+	      ((= next-key (fingers-region-specifier 'line-rest)) (fingers-copy-until-end-of-line kill))
+	      ((= next-key (fingers-region-specifier 'word)) (fingers-copy-word kill))
+	      ((= next-key (fingers-region-specifier 'word-and-whitespace)) (fingers-copy-word-and-whitespace kill))
+	      ((= next-key (fingers-region-specifier 'symbol)) (fingers-copy-symbol kill))
+	      ((= next-key (fingers-region-specifier 'symbol-and-whitespace)) (fingers-copy-symbol-and-whitespace kill))
+	      ((= next-key (fingers-region-specifier 'inside-pair)) (fingers-copy-inside-pair kill))
+	      ((= next-key (fingers-region-specifier 'with-pair)) (fingers-copy-with-pair kill))
+	      ((= next-key (fingers-region-specifier 'with-pair-and-whitespace)) (fingers-copy-with-pair-and-whitespace kill))
 	      (t (set-mark (point))
 		 (call-interactively (key-binding (kbd (string next-key))))
 		 (fingers-copy-current-region kill)))))))
