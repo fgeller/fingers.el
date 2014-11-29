@@ -518,12 +518,12 @@
       (ue . isearch-forward)
       (uu . isearch-repeat-forward)
       (uh . fingers-move-to-next-word-occurrence)
-      (ur . fingers-move-to-next-symbol-occurrence)
+      (ut . fingers-move-to-next-symbol-occurrence)
       (uo . isearch-occur)
       (po . isearch-backward)
       (pp . isearch-repeat-backward)
       (ph . fingers-move-to-previous-word-occurrence)
-      (pr . fingers-move-to-previous-symbol-occurrence)
+      (pt . fingers-move-to-previous-symbol-occurrence)
 
       ;; home row
       (y . beginning-of-line)
