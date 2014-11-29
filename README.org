@@ -1,7 +1,7 @@
 * fingers.el
 
-  Modal text editing for Emacs: A collection of key bindings with ergonomics in
-  mind bundled with basic text manipulation commands.
+  Modal text editing for Emacs: A collection of key bindings and basic text
+  manipulation commands.
 
 ** Installation
 
@@ -34,12 +34,12 @@
      (setq fingers-selection-specifiers
            '((char . ?b)
              (char-and-whitespace . ?B)
-             (line . ?f)
-             (line-rest . ?r)
+             (line . ?g)
+             (line-rest . ?G)
              (word . ?d)
              (word-and-whitespace . ?D)
-             (symbol . ?e)
-             (symbol-and-whitespace . ?E)
+             (symbol . ?f)
+             (symbol-and-whitespace . ?F)
              (inside-pair . ?s)
              (with-pair . ?a)
              (with-pair-and-whitespace . ?A)))
@@ -80,23 +80,46 @@
 
    The following tables describe the current bindings when =fingers-mode= is
    active. The commands are sometimes abbreviated for formatting, you can always
-   use =C-h k= to get the actual binding. Commands that are formatted like =a/b=
-   indicate that =b= is bound to the upper case version of the key that triggers
-   =a=.
+   use =C-h k= to get the actual binding.
+
+*** Left Hand: Text manipulation
+
+    Bindings:
+    |------------+-------------+-------------------------+---------------+-------------|
+    | 1          | 2           | 3                       | 4             | 5           |
+    |------------+-------------+-------------------------+---------------+-------------|
+    | q:         | d:duplicate | r:query replace         | w:join line   | b:open line |
+    |------------+-------------+-------------------------+---------------+-------------|
+    | a:surround | s:remove    | h:yank H:ring           | t:kill T:copy | g:M- G:C-M- |
+    |------------+-------------+-------------------------+---------------+-------------|
+    | z:repeat   | x:x-map     | m:macro-rec M:macro-end | c:c-map       | v:repl char |
+    |------------+-------------+-------------------------+---------------+-------------|
+
+    Region specifiers:
+
+    |------------------+-----------+---------------+---------------+------------------------|
+    | 1                | 2         | 3             | 4             | 5                      |
+    |------------------+-----------+---------------+---------------+------------------------|
+    | q:               | d:        | r:            | w:            | b:                     |
+    |------------------+-----------+---------------+---------------+------------------------|
+    | a:with pair A:+w | s:in pair | h:word H:+w   | t:symbol T:+w | g:line G:till line end |
+    |------------------+-----------+---------------+---------------+------------------------|
+    | z:               | x:        | m:            | c:            | v:char V:+w            |
+    |------------------+-----------+---------------+---------------+------------------------|
 
 *** Right Hand: Navigation
 
     Bindings:
 
-    |---------+-----------+--------------+------------+------------+---------|
-    | 1st     | 2nd       | 3rd          | 4th        | 5th        | 6th     |
-    |---------+-----------+--------------+------------+------------+---------|
-    | apropos | register* | search down* | search up* |            |         |
-    |---------+-----------+--------------+------------+------------+---------|
-    | bol/bob | left/word | down/page    | up/page    | right/word | eol/eob |
-    |---------+-----------+--------------+------------+------------+---------|
-    | grep    |           |              |            |            |         |
-    |---------+-----------+--------------+------------+------------+---------|
+    |-----------+-------------+----------------+--------------+--------------+-----------|
+    | 6         | 7           | 8              | 9            | 0            | -         |
+    |-----------+-------------+----------------+--------------+--------------+-----------|
+    | j:apropos | f:register* | u:search down* | p:search up* | ;:           | [:        |
+    |-----------+-------------+----------------+--------------+--------------+-----------|
+    | y:bol/bob | n:left/word | e:down/page    | o:up/page    | i:right/word | ':eol/eob |
+    |-----------+-------------+----------------+--------------+--------------+-----------|
+    | k:grep    | l:          | ,:             | .:           | /:           |           |
+    |-----------+-------------+----------------+--------------+--------------+-----------|
 
     Prefixes are denoted by =*=. Examples for Workman layout:
      - =ff= jump-to-register
@@ -107,27 +130,3 @@
      - =po= isearch-backward
      - =pp= isearch-repeat-backward
 
-*** Left Hand: Text manipulation
-
-    Bindings:
-    |----------+-----------+----------------+-----------+-----------|
-    | 1st      | 2nd       | 3rd            | 4th       | 5th       |
-    |----------+-----------+----------------+-----------+-----------|
-    |          | duplicate | query replace  | join line | open line |
-    |----------+-----------+----------------+-----------+-----------|
-    | surround | remove    | yank/-ring     | kill/copy | M-/C-M-   |
-    |----------+-----------+----------------+-----------+-----------|
-    | repeat   | x-map     | macro-rec/-end | c-map     | repl char |
-    |----------+-----------+----------------+-----------+-----------|
-
-    Region specifiers:
-
-    |--------------+---------+-----------+---------------+---------|
-    | 1st          | 2nd     | 3rd       | 4th           | 5th     |
-    |--------------+---------+-----------+---------------+---------|
-    |              |         | symbol/+w | till line end |         |
-    |--------------+---------+-----------+---------------+---------|
-    | with pair/+w | in pair | word/+w   | line          |         |
-    |--------------+---------+-----------+---------------+---------|
-    |              |         |           |               | char/+w |
-    |--------------+---------+-----------+---------------+---------|

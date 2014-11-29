@@ -1,4 +1,4 @@
-;;; fingers.el --- Modal editing.
+;;; fingers.el --- Modal editing with universal text manipulation helpers.
 
 ;; Copyright (c) 2014 Felix Geller
 
@@ -37,12 +37,12 @@
 ;;
 ;; v: char
 ;; V: char and surrounding whitespace
-;; t: whole line
-;; w: point until end of line
+;; g: whole line
+;; G: point until end of line
 ;; h: word
 ;; H: word and surrounding whitespace
-;; r: symbol
-;; R: symbol and surrounding whitespace
+;; t: symbol
+;; T: symbol and surrounding whitespace
 ;; s: inside pair
 ;; a: with pair
 ;; A: with pair and surrounding whitespace
@@ -58,12 +58,12 @@
 (defvar fingers-selection-specifiers
   '((char . ?v)
     (char-and-whitespace . ?V)
-    (line . ?t)
-    (line-rest . ?w)
+    (line . ?g)
+    (line-rest . ?G)
     (word . ?h)
     (word-and-whitespace . ?H)
-    (symbol . ?r)
-    (symbol-and-whitespace . ?R)
+    (symbol . ?t)
+    (symbol-and-whitespace . ?T)
     (inside-pair . ?s)
     (with-pair . ?a)
     (with-pair-and-whitespace . ?A))
