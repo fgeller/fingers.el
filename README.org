@@ -79,7 +79,7 @@
 
 *** Left Hand: Text manipulation
 
-    Available bindings on the left hand:
+    Available bindings on the left hand (Workman layout):
 
     |------------+------------------+--------------------------+---------------+-------------|
     | *1*:         | *2*:               | *3*:                       | *4*:            | *5*:          |
@@ -102,7 +102,7 @@
     between =s= or with an enclosing pair =a=. Upper case versions trigger
     selections with surrounding whitespace or from point till line end for =G=.
 
-    The following table lists the region specifiers on the left hand:
+    The following table lists the region specifiers on the left hand (Workman layout):
 
     |------------------+-----------+-------------+---------------+------------------------|
     | *1*:               | *2*:        | *3*:          | *4*:            | *5*:                     |
@@ -196,7 +196,7 @@
 
 *** Right Hand: Navigation
 
-    Available bindings on the right hand, prefixes are marked by =(p)=:
+    Available bindings on the right hand (Workman layout), prefixes are marked by =(p)=:
 
     |-------------+---------------+------------------+----------------+----------------+-----------------|
     | *6*:          | *7*:            | *8*:               | *9*:             | *0*:             | *-*:              |
