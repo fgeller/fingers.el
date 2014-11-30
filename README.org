@@ -237,7 +237,7 @@
     =fingers-mode= has no external requirements, it only loads =thingatpt= which
     is bundled with GNU Emacs. But I personally use several extensions for which
     I either use unbound keys or replace existing bindings. For example, I
-    replace the builtin functionality for =query-replace= with
+    replace the built-in functionality for =query-replace= with
     [[https://github.com/syohex/emacs-anzu][anzu]]'s version that offers
     immediate visual feedback:
 
