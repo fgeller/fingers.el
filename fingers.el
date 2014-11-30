@@ -25,28 +25,13 @@
 
 ;;; Commentary:
 
-;; Requires `thingatpt' to identify symbol at point.
-;;
-;; Based on ideas found in `boon' and `god-mode'.
-;;  - boon: https://github.com/jyp/boon
-;;  - god-mode: https://github.com/chrisdone/god-mode
-;;
+;; fingers-mode is a global minor mode that introduces key bindings for
+;; navigation and text manipulation. It relies on modal editing to reduce the
+;; usage of modifiers like Control and Meta. It introduces a new keymap to
+;; trigger commands without the need for modifiers and can easily be toggled to
+;; fall back to inserting text as usually in Emacs.
 
-;;
-;; Region keys
-;;
-;; v: char
-;; V: char and surrounding whitespace
-;; g: whole line
-;; G: point until end of line
-;; h: word
-;; H: word and surrounding whitespace
-;; t: symbol
-;; T: symbol and surrounding whitespace
-;; s: inside pair
-;; a: with pair
-;; A: with pair and surrounding whitespace
-;; pairs: (), {}, [], <>, '', ""
+;; More information: https://github.com/fgeller/fingers.el/
 
 (require 'thingatpt)
 
