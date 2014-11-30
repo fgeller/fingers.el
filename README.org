@@ -91,9 +91,9 @@
     | *z*:repeat   | *x*:x-map          | *m*:macro-rec *M*:macro-end  | *c*:c-map       | *v*:repl char |
     |------------+------------------+--------------------------+---------------+-------------|
 
-    The home row binds common yanking =h=, copying =H= and there are also
-    functions to add a pair of surrounding strings =a= or remove them similar to
-    paredit's splice to =s=. These commands expect a region as an argument that
+    The home row binds common killing =t=, copying =T= and there are also
+    functions to add a pair of surrounding strings =a= or remove them =s=, similar to
+    paredit's splice command. These commands expect a region as an argument that
     can either be active prior to triggering the command or be selected
     afterwards. Regular navigation commands on the right hand can be used to
     make a selection but also a set of bindings on the left hand allow to
