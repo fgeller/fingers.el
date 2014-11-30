@@ -631,7 +631,22 @@
     (fingers-mode-activate-globally)))
 
 (define-minor-mode fingers-mode
-  "Minor mode "
+  "Minor mode that introduces key bindings for navigation and
+text manipulation. It relies on modal editing to reduce the usage
+of modifiers like Control and Meta. It introduces a new keymap to
+trigger commands without the need for modifiers and can easily be
+toggled to fall back to inserting text as usually in Emacs.
+
+Available bindings:
+
+\\{fingers-mode-map}
+The x prefix has the following bindings:
+
+\\{fingers-mode-x-map}
+The c prefix has the following bindings:
+
+\\{fingers-mode-c-map}
+"
   nil " fingers" fingers-mode-map)
 
 (provide 'fingers)
