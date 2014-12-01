@@ -652,3 +652,5 @@ The c prefix has the following bindings:
   nil " fingers" fingers-mode-map)
 
 (provide 'fingers)
+
+;;; fingers.el ends here
