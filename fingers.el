@@ -630,6 +630,7 @@
       (fingers-mode-deactivate-globally)
     (fingers-mode-activate-globally)))
 
+;;;###autoload
 (define-minor-mode fingers-mode
   "Minor mode that introduces key bindings for navigation and
 text manipulation. It relies on modal editing to reduce the usage
