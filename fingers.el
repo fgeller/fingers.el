@@ -570,6 +570,7 @@
     (q . ,(fingers-pass-events-command "C-c C-q"))
     (s . ,(fingers-pass-events-command "C-c C-s"))
     (t . ,(fingers-pass-events-command "C-c C-t"))
+    (xa . ,(fingers-pass-events-command "C-c C-x C-a"))
     (! . ,(fingers-pass-events-command "C-c !"))
     (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
     )
