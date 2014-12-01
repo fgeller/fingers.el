@@ -32,26 +32,28 @@
 ;; (require 'fingers)
 ;; (require 'fingers-neo)
 ;; (setq fingers-keyboard-layout-mapper 'fingers-workman-to-neo)
+;; (setq fingers-region-specifiers fingers-neo-region-specifiers)
 ;; (fingers-reset-bindings)
-;;
-;; (setq fingers-region-specifiers
-;;   '((char . ?z)
-;;     (char-and-whitespace . ?Z)
-;;     (line . ?o)
-;;     (line-rest . ?O)
-;;     (word . ?a)
-;;     (word-and-whitespace . ?A)
-;;     (symbol . ?e)
-;;     (symbol-and-whitespace . ?E)
-;;     (inside-pair . ?i)
-;;     (with-pair . ?u)
-;;     (with-pair-and-whitespace . ?U)))
-;;
 
 ;; This currently maps bindings for the main `fingers-mode-map', not for
 ;; `fingers-mode-x-map' or `fingers-mode-c-map' which are mostly using default
 ;; Emacs bindings.
 ;;
+
+(defvar fingers-neo-region-specifiers
+  '((char . ?z)
+    (char-and-whitespace . ?Z)
+    (line . ?o)
+    (line-rest . ?O)
+    (word . ?a)
+    (word-and-whitespace . ?A)
+    (symbol . ?e)
+    (symbol-and-whitespace . ?E)
+    (inside-pair . ?i)
+    (with-pair . ?u)
+    (with-pair-and-whitespace . ?U))
+  "Region specifiers tuned for the Neo keyboard layout")
+
 
 (defun fingers-workman-to-neo (keys)
   (let ((workman-to-neo

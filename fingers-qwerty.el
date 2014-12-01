@@ -32,21 +32,8 @@
 ;; (require 'fingers)
 ;; (require 'fingers-qwerty)
 ;; (setq fingers-keyboard-layout-mapper 'fingers-workman-to-qwerty)
+;; (setq fingers-region-specifiers fingers-qwerty-region-specifiers)
 ;; (fingers-reset-bindings)
-;;
-;; (setq fingers-region-specifiers
-;;   '((char . ?b)
-;;     (char-and-whitespace . ?B)
-;;     (line . ?g)
-;;     (line-rest . ?G)
-;;     (word . ?d)
-;;     (word-and-whitespace . ?D)
-;;     (symbol . ?f)
-;;     (symbol-and-whitespace . ?F)
-;;     (inside-pair . ?s)
-;;     (with-pair . ?a)
-;;     (with-pair-and-whitespace . ?A)))
-;;
 
 ;; This currently maps bindings for the main `fingers-mode-map', not for
 ;; `fingers-mode-x-map' or `fingers-mode-c-map' which are mostly using default
@@ -54,6 +41,20 @@
 ;;
 ;; Bindings are printed to the *Messages* buffer for debug info.
 ;;
+
+(defvar fingers-qwerty-region-specifiers
+  '((char . ?b)
+    (char-and-whitespace . ?B)
+    (line . ?g)
+    (line-rest . ?G)
+    (word . ?d)
+    (word-and-whitespace . ?D)
+    (symbol . ?f)
+    (symbol-and-whitespace . ?F)
+    (inside-pair . ?s)
+    (with-pair . ?a)
+    (with-pair-and-whitespace . ?A))
+  "Region specifiers tuned for the Qwerty layout.")
 
 (defun fingers-workman-to-qwerty (keys)
   (let ((workman-to-qwerty

@@ -15,20 +15,9 @@
 
    #+begin_src emacs-lisp
      (require 'fingers-qwerty)
+     (setq fingers-region-specifiers fingers-qwerty-region-specifiers)
      (setq fingers-keyboard-layout-mapper 'fingers-workman-to-qwerty)
      (fingers-reset-bindings)
-     (setq fingers-region-specifiers
-           '((char . ?b)
-             (char-and-whitespace . ?B)
-             (line . ?g)
-             (line-rest . ?G)
-             (word . ?d)
-             (word-and-whitespace . ?D)
-             (symbol . ?f)
-             (symbol-and-whitespace . ?F)
-             (inside-pair . ?s)
-             (with-pair . ?a)
-             (with-pair-and-whitespace . ?A)))
    #+end_src
 
    Refer to =fingers-qwerty.el= and =fingers-neo.el= for more information about
