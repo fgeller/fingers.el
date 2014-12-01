@@ -230,6 +230,20 @@
     point. For jumping to occurrences of the word under point you can use =uh=
     and =ph= respectively.
 
+*** Mappings
+
+    =fingers-mode= has defaults that I tuned for the Workman layout, but
+    currently there are mappings available for the Qwerty and the Neo
+    layout. You can use =fingers-qwerty.el= and =fingers-neo.el= as templates to
+    add mappings for a different layout.
+
+    The Qwerty mappings have one difference to the Workman bindings: The
+    bindings for =m= and =c= on the Workman layout are switched so that the
+    common prefix =C-c= is in the usual place. More specifically, pressing =c=
+    for the Qwerty layout will trigger the bindings in =fingers-mode-c-map= and
+    pressing =v= will trigger macro related commands that are bound to =m= on
+    the Workman layout.
+
 ** Extensions
 
 *** Third party libraries
