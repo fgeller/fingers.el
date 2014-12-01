@@ -595,41 +595,13 @@
 ;;
 ;; Mode management
 ;;
-(defvar fingers-mode-active nil
-  "Global flag to indicate whether fingers-mode is active.")
-(defvar fingers-mode-excluded-major-modes '(minibuffer-inactive-mode)
+(defvar fingers-mode-excluded-major-modes '()
   "List of major-modes for which fingers-mode should not be activated.")
 
-(defun fingers-mode-activate ()
-  (fingers-mode 1))
-
-(defun fingers-mode-deactivate ()
-  (fingers-mode -1))
-
 (defun fingers-mode-maybe-activate ()
-  (let ((should-activate (not (member major-mode fingers-mode-excluded-major-modes))))
-    (when should-activate
-      (fingers-mode-activate))))
-
-(defun fingers-mode-deactivate-globally ()
-  (setq fingers-mode-active nil)
-  (remove-hook 'after-change-major-mode-hook 'fingers-mode-maybe-activate)
-  (mapc (lambda (buffer) (with-current-buffer buffer (fingers-mode-deactivate)))
-        (buffer-list))
-  (run-hooks 'fingers-mode-deactivated-hook))
-
-(defun fingers-mode-activate-globally ()
-  (setq fingers-mode-active t)
-  (add-hook 'after-change-major-mode-hook 'fingers-mode-maybe-activate)
-  (mapc (lambda (buffer) (with-current-buffer buffer (fingers-mode-maybe-activate)))
-        (buffer-list))
-  (run-hooks 'fingers-mode-activated-hook))
-
-(defun fingers-mode-toggle-globally ()
-  (interactive)
-  (if fingers-mode-active
-      (fingers-mode-deactivate-globally)
-    (fingers-mode-activate-globally)))
+  (unless (or (minibufferp)
+	      (member major-mode fingers-mode-excluded-major-modes))
+    (fingers-mode 1)))
 
 ;;;###autoload
 (define-minor-mode fingers-mode
@@ -649,7 +621,13 @@ The c prefix has the following bindings:
 
 \\{fingers-mode-c-map}
 "
-  nil " fingers" fingers-mode-map)
+  nil " fingers" fingers-mode-map :group 'fingers
+  (run-hooks 'fingers-mode-hook))
+
+(define-globalized-minor-mode global-fingers-mode
+  fingers-mode
+  fingers-mode-maybe-activate
+  :group 'fingers)
 
 (provide 'fingers)
 

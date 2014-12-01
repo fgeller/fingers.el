@@ -34,14 +34,14 @@
    Refer to =fingers-qwerty.el= and =fingers-neo.el= for more information about
    the mappings.
 
-   Next you should bind the function =fingers-mode-toggle-globally= to enable
+   Next you should bind the function =global-fingers-mode= to enable
    and disable =fingers-mode= globally. You can bind this function to any
    convenient key sequence. For example, I use
    [[http://www.emacswiki.org/emacs/KeyChord][key-chord]] to toggle it via =oe=,
    where =jk= would be better suited for Qwerty users:
 
     #+begin_src emacs-lisp
-      (key-chord-define-global "oe" 'fingers-mode-toggle-globally)
+      (key-chord-define-global "oe" 'global-fingers-mode)
     #+end_src
 
     Continue reading for more information on the available bindings.
@@ -267,15 +267,14 @@
          (let ((faces-to-toggle '(mode-line mode-line-inactive))
                (enabled-color (if terminal-p "gray" "#e8e8e8"))
                (disabled-color (if terminal-p "green" "#a1b56c")))
-           (cond (fingers-mode-active
+           (cond (fingers-mode
                   (mapcar (lambda (face) (set-face-background face enabled-color))
                           faces-to-toggle))
                  (t
                   (mapcar (lambda (face) (set-face-background face disabled-color))
                           faces-to-toggle)))))
 
-       (add-hook 'fingers-mode-activated-hook 'fingers-mode-visual-toggle)
-       (add-hook 'fingers-mode-deactivated-hook 'fingers-mode-visual-toggle)
+       (add-hook 'fingers-mode-hook 'fingers-mode-visual-toggle)
      #+end_src
 
 ** References
