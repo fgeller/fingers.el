@@ -543,6 +543,7 @@
     (me . eshell)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
+    (S . save-some-buffers)
     (vd . vc-diff)
     (vD . vc-root-diff)
     (ve . vc-version-ediff)
