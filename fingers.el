@@ -625,6 +625,7 @@ The c prefix has the following bindings:
   nil " fingers" fingers-mode-map :group 'fingers
   (run-hooks 'fingers-mode-hook))
 
+;;;###autoload
 (define-globalized-minor-mode global-fingers-mode
   fingers-mode
   fingers-mode-maybe-activate
