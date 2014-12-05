@@ -549,6 +549,7 @@
     (ve . vc-version-ediff)
     (vg . vc-annotate)
     (vl . vc-print-log)
+    (vu . vc-revert)
     (v~ . vc-revision-other-window)
     (x . execute-extended-command)
     (0 . delete-window)
