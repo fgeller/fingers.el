@@ -535,6 +535,7 @@
 
       ;; top row
       (j . apropos)
+      (J . ,(fingers-pass-events-command "C-h"))
       (fn . point-to-register)
       (ff . jump-to-register)
       (ue . isearch-forward)
