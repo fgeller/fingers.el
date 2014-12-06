@@ -49,6 +49,8 @@
     (word-and-whitespace . ?H)
     (symbol . ?t)
     (symbol-and-whitespace . ?T)
+    (between-whitespace . ?c)
+    (with-surrounding-whitespace . ?C)
     (inside-pair . ?s)
     (with-pair . ?a)
     (with-pair-and-whitespace . ?A))
@@ -239,7 +241,10 @@
     (goto-char start-position)))
 
 (defun fingers-skip-whitespace-forward ()
-  (skip-chars-forward " \t"))
+  (skip-chars-forward " \t\n"))
+
+(defun fingers-skip-whitespace-backward ()
+  (skip-chars-backward " \t\n"))
 
 ;;
 ;; mark
@@ -257,6 +262,8 @@
      ((= next-key (fingers-region-specifier 'word-and-whitespace)) (fingers-mark-word-and-whitespace))
      ((= next-key (fingers-region-specifier 'symbol)) (fingers-mark-symbol))
      ((= next-key (fingers-region-specifier 'symbol-and-whitespace)) (fingers-mark-symbol-and-whitespace))
+     ((= next-key (fingers-region-specifier 'between-whitespace)) (fingers-mark-between-whitespace))
+     ((= next-key (fingers-region-specifier 'with-surrounding-whitespace)) (fingers-mark-with-surrounding-whitespace))
      ((= next-key (fingers-region-specifier 'inside-pair)) (fingers-mark-inside-pair))
      ((= next-key (fingers-region-specifier 'with-pair)) (fingers-mark-with-pair))
      ((= next-key (fingers-region-specifier 'with-pair-and-whitespace)) (fingers-mark-with-pair-and-whitespace))
@@ -293,6 +300,24 @@
   (fingers-set-mark-before-whitespace-and-return)
   (forward-symbol 1)
   (fingers-skip-whitespace-forward))
+
+(defun fingers-mark-between-whitespace ()
+  (search-backward-regexp "[ \t\n]" (point-min) t)
+  (fingers-skip-whitespace-forward)
+  (set-mark (point))
+  (search-forward-regexp "[ \t\n]" (point-max) t)
+  (fingers-skip-whitespace-backward))
+
+(defun fingers-mark-with-surrounding-whitespace ()
+  (search-backward-regexp "[ \t\n]" (point-min) t)
+  (let ((non-whitespace-position (save-excursion
+				   (fingers-skip-whitespace-forward)
+				   (point))))
+    (fingers-skip-whitespace-backward)
+    (set-mark (point))
+    (goto-char non-whitespace-position)
+    (search-forward-regexp "[ \t\n]" (point-max) t)
+    (fingers-skip-whitespace-forward)))
 
 (defun fingers-mark-until-end-of-line ()
   (set-mark (point))
@@ -357,6 +382,8 @@
 	      ((= next-key (fingers-region-specifier 'word-and-whitespace)) (fingers-copy-word-and-whitespace kill))
 	      ((= next-key (fingers-region-specifier 'symbol)) (fingers-copy-symbol kill))
 	      ((= next-key (fingers-region-specifier 'symbol-and-whitespace)) (fingers-copy-symbol-and-whitespace kill))
+	      ((= next-key (fingers-region-specifier 'between-whitespace)) (fingers-copy-between-whitespace kill))
+	      ((= next-key (fingers-region-specifier 'with-surrounding-whitespace)) (fingers-copy-with-surrounding-whitespace kill))
 	      ((= next-key (fingers-region-specifier 'inside-pair)) (fingers-copy-inside-pair kill))
 	      ((= next-key (fingers-region-specifier 'with-pair)) (fingers-copy-with-pair kill))
 	      ((= next-key (fingers-region-specifier 'with-pair-and-whitespace)) (fingers-copy-with-pair-and-whitespace kill))
@@ -386,6 +413,14 @@
 
 (defun fingers-copy-symbol-and-whitespace (&optional kill)
   (fingers-mark-symbol-and-whitespace)
+  (fingers-copy-current-region kill))
+
+(defun fingers-copy-between-whitespace (&optional kill)
+  (fingers-mark-between-whitespace)
+  (fingers-copy-current-region kill))
+
+(defun fingers-copy-with-surrounding-whitespace (&optional kill)
+  (fingers-mark-with-surrounding-whitespace)
   (fingers-copy-current-region kill))
 
 (defun fingers-copy-until-end-of-line (&optional kill)
