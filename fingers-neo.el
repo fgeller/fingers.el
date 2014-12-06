@@ -49,6 +49,8 @@
     (word-and-whitespace . ?A)
     (symbol . ?e)
     (symbol-and-whitespace . ?E)
+    (between-whitespace . ?p)
+    (with-surrounding-whitespace . ?P)
     (inside-pair . ?i)
     (with-pair . ?u)
     (with-pair-and-whitespace . ?U))

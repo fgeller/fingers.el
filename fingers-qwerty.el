@@ -51,6 +51,8 @@
     (word-and-whitespace . ?D)
     (symbol . ?f)
     (symbol-and-whitespace . ?F)
+    (between-whitespace . ?v)
+    (with-surrounding-whitespace . ?V)
     (inside-pair . ?s)
     (with-pair . ?a)
     (with-pair-and-whitespace . ?A))
