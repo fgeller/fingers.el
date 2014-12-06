@@ -103,7 +103,7 @@
     | *z*:               | *x*:        | *m*:          | *c*:between whitespace *C*:+w | *v*:char *V*:+w            |
     |------------------+-----------+-------------+---------------------------+------------------------|
 
-    The available pairs are currently =()=, ={}=, =[]=, =<>=, "", and
+    The available pairs are currently =()=, ={}=, =[]=, =<>=, "", `` and
     ''. Additionally, for pair selection you can double press the key for a
     command and =fingers-mode= will identify the next pair that starts left of
     point. For example, if =|= represents point:

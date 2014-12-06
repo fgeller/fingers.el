@@ -160,14 +160,15 @@
 
 (defun fingers-find-next-left-pair-start ()
   (save-excursion
-    (search-backward-regexp "\\((\\|{\\|\\[\\|<\\|'\\|\"\\)" (point-min) t)
+    (search-backward-regexp "\\((\\|{\\|\\[\\|<\\|'\\|\"\\|`\\)" (point-min) t)
     (let ((start-char (buffer-substring-no-properties (point) (1+ (point)))))
       (cond ((string= "(" start-char) '("(" . ")"))
 	    ((string= "[" start-char) '("[" . "]"))
 	    ((string= "{" start-char) '("{" . "}"))
 	    ((string= "<" start-char) '("<" . ">"))
 	    ((string= "'" start-char) '("'" . "'"))
-	    ((string= "\"" start-char) '("\"" . "\""))))))
+	    ((string= "\"" start-char) '("\"" . "\""))
+	    ((string= "`" start-char) '("`" . "`"))))))
 
 (defun fingers-dispatch-with-pair (target &optional default)
   (let* ((last-key-seq (this-single-command-keys))
@@ -180,6 +181,7 @@
           ((= next-key ?\<) (funcall target "<" ">"))
           ((= next-key ?\') (funcall target "'" "'"))
           ((= next-key ?\") (funcall target "\"" "\""))
+	  ((= next-key ?\`) (funcall target "`" "`"))
 	  ((and (= next-key last-key) inner-most-pair)
 	   (funcall target (car inner-most-pair) (cdr inner-most-pair)))
           (t
