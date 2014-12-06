@@ -106,25 +106,33 @@
   (interactive)
   (fingers-beginning-of-word)
   (forward-word)
-  (search-forward-regexp (concat "\\<" (regexp-quote (thing-at-point 'word)) "\\>"))
+  (let ((thing (thing-at-point 'word)))
+    (setq isearch-string thing)
+    (search-forward-regexp (concat "\\<" (regexp-quote thing) "\\>")))
   (fingers-beginning-of-word))
 
 (defun fingers-move-to-next-symbol-occurrence ()
   (interactive)
   (fingers-beginning-of-symbol)
   (forward-symbol 1)
-  (search-forward-regexp (concat "\\_<" (regexp-quote (thing-at-point 'symbol)) "\\_>"))
+  (let ((thing (thing-at-point 'symbol)))
+    (setq isearch-string thing)
+    (search-forward-regexp (concat "\\_<" (regexp-quote thing) "\\_>")))
   (fingers-beginning-of-symbol))
 
 (defun fingers-move-to-previous-word-occurrence ()
   (interactive)
   (fingers-beginning-of-word)
-  (search-backward-regexp (concat "\\<" (regexp-quote (thing-at-point 'word)) "\\>")))
+  (let ((thing (thing-at-point 'word)))
+    (setq isearch-string thing)
+    (search-backward-regexp (concat "\\<" (regexp-quote thing) "\\>"))))
 
 (defun fingers-move-to-previous-symbol-occurrence ()
   (interactive)
   (fingers-beginning-of-symbol)
-  (search-backward-regexp (concat "\\_<" (regexp-quote (thing-at-point 'symbol)) "\\_>")))
+  (let ((thing (thing-at-point 'symbol)))
+    (setq isearch-string thing)
+    (search-backward-regexp (concat "\\_<" (regexp-quote thing) "\\_>"))))
 
 ;;
 ;; Helpers for manipulation
