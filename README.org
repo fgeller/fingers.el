@@ -3,9 +3,13 @@
   Modal text editing for Emacs: A collection of key bindings for navigation and
   text manipulation.
 
+  [[http://melpa.milkbox.net:1337/#/fingers][file:http://melpa.milkbox.net:1337/packages/fingers-badge.svg]]
+
 ** Installation
 
-   Add this repository to your =load-path= and load it via:
+   You can install this package via [[http://melpa.milkbox.net:1337/#/][MELPA]]
+   or add this repository manually to your =load-path=. Load the library in your
+   preferred way, for example:
 
    #+begin_src emacs-lisp
      (require 'fingers)
