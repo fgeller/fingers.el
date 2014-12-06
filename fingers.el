@@ -85,7 +85,6 @@
 		      (t (error (format "unexpected key: %s" (car binding))))))
 	   (target (cdr binding))
 	   (mapped-sequence (funcall layout-mapper key)))
-      (message "Defining binding for [%s] to target [%s]" mapped-sequence target)
       (define-key map (kbd mapped-sequence) target))))
 
 (defun fingers-meta ()
@@ -202,7 +201,6 @@
             ((looking-at (regexp-quote (if look-for-start start end))) (setq counter (1- counter)))))))
 
 (defun fingers-move-point-to-pair-start-simple (pair)
-  (message "looking for simple [%s]" pair)
   (backward-char 1)
   (while (not (looking-at (regexp-quote pair)))
     (backward-char 1)))
