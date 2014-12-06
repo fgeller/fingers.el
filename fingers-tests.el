@@ -34,7 +34,7 @@
     (insert input)
     (goto-char position)
     (fingers-mark-inside-pair-strings start end)
-    (fingers-kill-current-region)
+    (fingers-copy-current-region 'kill)
     (buffer-substring (point-min) (point-max))))
 
 (defun fingers-test-fingers-mark-with-pair-strings (input position start end)
@@ -42,7 +42,7 @@
     (insert input)
     (goto-char position)
     (fingers-mark-with-pair-strings start end)
-    (fingers-kill-current-region)
+    (fingers-copy-current-region 'kill)
     (buffer-substring (point-min) (point-max))))
 
 (defun fingers-test-fingers-mark-with-pair-strings-and-whitespace (input position start end)
@@ -50,7 +50,7 @@
     (insert input)
     (goto-char position)
     (fingers-mark-with-pair-strings-and-whitespace start end)
-    (fingers-kill-current-region)
+    (fingers-copy-current-region 'kill)
     (buffer-substring (point-min) (point-max))))
 
 (ert-deftest fingers-test:fingers-mark-inside-pair ()
