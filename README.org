@@ -322,12 +322,110 @@
 
     Middle and ring finger start prefixes for searching down =u= and up =p=. To
     start a search from point forward, press =ue= and enter the search string
-    (=po= for backwards search). Exit isearch via =RET= and continue searching
-    downward via =uu= or upward via =pp=. Alternatively you can press =uo= to
-    trigger =occur= for the current search string. Additionally you can use =ut=
-    and =pt= to jump to the next or previous occurrence of the symbol under
-    point. For jumping to occurrences of the word under point you can use =uh=
-    and =ph= respectively.
+    (=po= for backwards search). For example, pressing =uewhite= for the
+    following snippet:
+
+    #+begin_src emacs-lisp
+      (defvar fing|ers-region-specifiers
+        '((char . ?v)
+          (char-and-whitespace . ?V)
+          (line . ?g)
+          (line-rest . ?G)
+          (word . ?h)
+          (word-and-whitespace . ?H)
+          (symbol . ?t)
+          (symbol-and-whitespace . ?T)
+          (between-whitespace . ?c)
+          (with-surrounding-whitespace . ?C)
+          (inside-pair . ?s)
+          (with-pair . ?a)
+          (with-pair-and-whitespace . ?A))
+        "Mapping from region type to identifier key")
+
+      (defun fingers-region-specifier (type)
+        (cdr (assoc type fingers-region-specifiers)))
+    #+end_src
+
+    Will move point and highlight the occurrences of =white= (denoted by =[]=
+    where the first =]= is also point):
+
+    #+begin_src emacs-lisp
+      (defvar fingers-region-specifiers
+        '((char . ?v)
+          (char-and-[white]space . ?V)
+          (line . ?g)
+          (line-rest . ?G)
+          (word . ?h)
+          (word-and-[white]space . ?H)
+          (symbol . ?t)
+          (symbol-and-[white]space . ?T)
+          (between-[white]space . ?c)
+          (with-surrounding-[white]space . ?C)
+          (inside-pair . ?s)
+          (with-pair . ?a)
+          (with-pair-and-[white]space . ?A))
+        "Mapping from region type to identifier key")
+
+      (defun fingers-region-specifier (type)
+        (cdr (assoc type fingers-region-specifiers)))
+    #+end_src
+
+    Exit isearch via =RET= and continue searching downward via =uu= or upward
+    via =pp=. Alternatively you can press =uo= to trigger =occur= for the
+    current search string =white=.
+
+    Additionally you can use =ut= and =pt= to jump to the next or previous
+    occurrence of the symbol under point. For jumping to occurrences of the word
+    under point you can use =uh= and =ph= respectively. Pressing =ut= in the
+    original snippet:
+
+    #+begin_src emacs-lisp
+      (defvar finge|rs-region-specifiers
+        '((char . ?v)
+          (char-and-whitespace . ?V)
+          (line . ?g)
+          (line-rest . ?G)
+          (word . ?h)
+          (word-and-whitespace . ?H)
+          (symbol . ?t)
+          (symbol-and-whitespace . ?T)
+          (between-whitespace . ?c)
+          (with-surrounding-whitespace . ?C)
+          (inside-pair . ?s)
+          (with-pair . ?a)
+          (with-pair-and-whitespace . ?A))
+        "Mapping from region type to identifier key")
+
+      (defun fingers-region-specifier (type)
+        (cdr (assoc type fingers-region-specifiers)))
+    #+end_src
+
+    Will move point to the next occurrence of the symbol
+    =fingers-region-specifiers=:
+
+    #+begin_src emacs-lisp
+      (defvar fingers-region-specifiers
+        '((char . ?v)
+          (char-and-whitespace . ?V)
+          (line . ?g)
+          (line-rest . ?G)
+          (word . ?h)
+          (word-and-whitespace . ?H)
+          (symbol . ?t)
+          (symbol-and-whitespace . ?T)
+          (between-whitespace . ?c)
+          (with-surrounding-whitespace . ?C)
+          (inside-pair . ?s)
+          (with-pair . ?a)
+          (with-pair-and-whitespace . ?A))
+        "Mapping from region type to identifier key")
+
+      (defun fingers-region-specifier (type)
+        (cdr (assoc type |fingers-region-specifiers)))
+    #+end_src
+
+    Pressing =uo= would trigger =occur= and show you all of the occurrences of
+    the last symbol or word you jumped to via =ut=/=pt= or =uh=/=ph=.
 
 *** Mappings
 
