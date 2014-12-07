@@ -97,20 +97,20 @@
 
     The following table lists the region specifiers on the left hand (Workman layout):
 
-    |------------------+-----------+-------------+---------------------------+------------------------|
-    | *1*:               | *2*:        | *3*:          | *4*:                        | *5*:                     |
-    |------------------+-----------+-------------+---------------------------+------------------------|
-    | *q*:               | *d*:        | *r*:          | *w*:                        | *b*:                     |
-    |------------------+-----------+-------------+---------------------------+------------------------|
+    |------------------+----------------+-------------+---------------------------+------------------------|
+    | *1*:               | *2*:             | *3*:          | *4*:                        | *5*:                     |
+    |------------------+----------------+-------------+---------------------------+------------------------|
+    | *q*:               | *d*:             | *r*:          | *w*:                        | *b*:                     |
+    |------------------+----------------+-------------+---------------------------+------------------------|
     | *a*:with pair *A*:+w | *s*:between pair | *h*:word *H*:+w | *t*:symbol *T*:+w             | *g*:line *G*:till line end |
-    |------------------+-----------+-------------+---------------------------+------------------------|
-    | *z*:               | *x*:        | *m*:          | *c*:between whitespace *C*:+w | *v*:char *V*:+w            |
-    |------------------+-----------+-------------+---------------------------+------------------------|
+    |------------------+----------------+-------------+---------------------------+------------------------|
+    | *z*:               | *x*:             | *m*:          | *c*:between whitespace *C*:+w | *v*:char *V*:+w            |
+    |------------------+----------------+-------------+---------------------------+------------------------|
 
     The available pairs are currently =()=, ={}=, =[]=, =<>=, "", `` and
     ''. Additionally, for pair selection you can double press the key for a
     command and =fingers-mode= will identify the next pair that starts left of
-    point. For example, if =|= represents point:
+    point. For example, if =|= represents point and =[]= the active region:
 
     #+begin_src text
       def greet(): Unit = {
@@ -118,7 +118,9 @@
       }
     #+end_src
 
-    Pressing =ss= (for splicing) will yield:
+    To remove the surrounding double quotes, you can use =s=. It will prompt for
+    a starting character of the pair you are trying to remove. You can use =s"=
+    to effectively remove the string delimiters (splice):
 
     #+begin_src text
       def greet(): Unit = {
@@ -126,7 +128,18 @@
       }
     #+end_src
 
-    Similarly, pressing =taa= will yield:
+    Pressing =ss= will yield the same result, as the double quote to the left
+    of point is the first character that is identified as the start of a pair:
+
+    #+begin_src text
+      def greet(): Unit = {
+        println(|Hello, world)
+      }
+    #+end_src
+
+    You can use =t= to kill a region. The command expects either a region
+    specifier or a navigation command (for example, next line). In the above
+    snippet pressing =tss= will yield:
 
     #+begin_src text
       def greet(): Unit = {
@@ -134,7 +147,11 @@
       }
     #+end_src
 
-    Where you can select the function body explicitly via =ta{=:
+    The first =s= is a region selector (between pair) and the second =s= causes
+    =fingers-mode= to look to the left for the first starting character of a
+    supported pair. In this case, the =(= is interpreted as the start of a pair
+    and everything until the matching parenthesis is killed. Now, you can select the
+    function body explicitly via =ta{=:
 
     #+begin_src text
       def greet(): Unit = |
@@ -173,6 +190,95 @@
     #+begin_src text
       |
     #+end_src
+
+    Notice that the =a= is a region specifier similar to =s=, but that includes
+    the surrounding pair. Many of the region specifiers have an upper case
+    analog that includes the surrounding whitespace. For example, pressing =taa=
+    for the following snippet:
+
+    #+begin_src text
+      (defun hello-there ()
+        (interactive)
+        (mess|age "1 + 1 + 2 + 3 = %s" (+ 1 1 2 3)))
+    #+end_src
+
+    Removes the contents and the surrounding =()= pair:
+
+    #+begin_src text
+      (defun hello-there ()
+        (interactive)
+        |)
+    #+end_src
+
+    Pressing =tAA= would clean up the whitespace and yield:
+
+    #+begin_src text
+      (defun hello-there ()
+        (interactive)|)
+    #+end_src
+
+    Notice that the same region specifiers work for marking as well, bound by
+    default to =SPC=. Pressing =SPCaa= for the above snippet yields the
+    following active region:
+
+    #+begin_src text
+      [(defun hello-there ()
+        (interactive))]
+    #+end_src
+
+    Where =]= also denotes point. Alternatively, pressing =SPCh= for the
+    following snippet:
+
+    #+begin_src text
+      (defun hello-there ()
+        (interactive))
+    #+end_src
+
+    Yields the active region:
+
+    #+begin_src text
+      (defun [hello]-there ()
+        (interactive))
+    #+end_src
+
+    Where pressing =SPCT= (that's =SPC= followed by =T=) would yield:
+
+    #+begin_src text
+      (defun[ hello-there ]()
+        (interactive))
+    #+end_src
+
+    =T= causes the selection of the symbol =hello-there= plus surrounding
+    whitespace.
+
+    Any navigation command can be used to manually define the active
+    region. For example, pressing =SPCG= for the following snippet:
+
+    #+begin_src text
+      (defun hello-there ()
+        (interactive))
+    #+end_src
+
+    Activates a region from point till end of line:
+
+    #+begin_src text
+      (defun [hello-there ()]
+        (interactive))
+    #+end_src
+
+    Pressing =SPC'= has the same effect, where ='= is the navigation command to
+    move point to then end of the line.
+
+    Active regions can be used as input to the commands to kill a region or
+    enclose it with a pair. For example, pressing =t= with the acitve region in
+    the above snippet yields:
+
+    #+begin_src text
+      (defun |
+        (interactive))
+    #+end_src
+
+    So pressing =SPC't=, =SPCGt=, =t'= or =tG= has the same effect.
 
     All of these manipulation commands are text based rather than identifying
     syntactic components in the buffer. The goal are generally applicable
