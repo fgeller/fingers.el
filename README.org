@@ -280,6 +280,10 @@
 
     So pressing any of =SPC't=, =SPCGt=, =t'=, =tG= has the same effect.
 
+    Here's a demo for some of the examples above:
+
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/fingers-mode.gif][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/fingers-mode.gif]]
+
     All of these manipulation commands are text based rather than identifying
     syntactic components in the buffer. The goal are generally applicable
     commands for text manipulation, rather than major-mode specific ones.
