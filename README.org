@@ -278,7 +278,7 @@
         (interactive))
     #+end_src
 
-    So pressing =SPC't=, =SPCGt=, =t'= or =tG= has the same effect.
+    So pressing any of =SPC't=, =SPCGt=, =t'=, =tG= has the same effect.
 
     All of these manipulation commands are text based rather than identifying
     syntactic components in the buffer. The goal are generally applicable
