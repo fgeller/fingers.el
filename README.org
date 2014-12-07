@@ -497,3 +497,42 @@
    =fingers-mode= is based on excellent ideas found in
    [[https://github.com/jyp/boon][boon]] and
    [[https://github.com/chrisdone/god-mode][god-mode]].
+
+   Compared to =god-mode=, =fingers-mode= is a bigger step away from the usual
+   key bindings in Emacs. Both share the =M-= and =M-C-= prefix via =g= and =G=,
+   and the common bindings for the =C-x= and =C-c= prefix are accessible via =x=
+   and =c= respectively. =fingers-mode= also bundles several text manipulation
+   commands and introduces new bindings for these and for navigation commands.
+
+   =fingers-mode= is very similarly to =boon= with a couple of details that are
+   different (in no particular order):
+
+    - =fingers-mode= has no external dependencies. This means that the package
+      is standalone, but also that some of the text manipulation commands might
+      not accomodate specific cases. More specifically, =fingers-mode= does not
+      rely on the excellent =expand-region=, which introduces selection helpers
+      specific to major modes. Instead, the goal are simple and easily
+      understandable defaults that are applicable to all text.
+
+    - Navigation commands are bound a little differently: Most navigation is on
+      the home row for =fingers-mode=, rather than split acroos home and top
+      row. =fingers-mode= also uses VIM-like keys (hjkl for left, down, up and
+      right) on home row but in the default position, not shifted to the
+      left. The search commands are available on the right side as well and
+      there are some helpers to jump to the next or previous occurrence of a
+      word or symbol.
+
+    - Several of the bindings for manipulation commands are different as well,
+      but I imagine they are mostly specific to personal taste and usage
+      frequency.
+
+    - No dependency on a specific keyboard layout. Some mappings are included,
+      and adding one should be straight-forward. The mappings are currently only
+      for the main bindings, not the bindings behind the =c= and =x= prefix
+      which are following mnemonics as the original ones. For example, =xs=
+      still triggers the save command or =xv= is still a prefix for version
+      control related commands.
+
+   Compared to both, =fingers-mode= is by default active for every mode, except
+   the minibuffer. I prefer this consistency, but you can customize this to
+   exclude modes like =dired= and =magit=, similarly to =boon= and =god-mode=.
