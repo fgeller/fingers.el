@@ -230,7 +230,7 @@
     following snippet:
 
     #+begin_src text
-      (defun hello-there ()
+      (defun he|llo-there ()
         (interactive))
     #+end_src
 
@@ -255,7 +255,7 @@
     region. For example, pressing =SPCG= for the following snippet:
 
     #+begin_src text
-      (defun hello-there ()
+      (defun |hello-there ()
         (interactive))
     #+end_src
 
