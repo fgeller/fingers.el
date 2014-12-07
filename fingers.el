@@ -244,7 +244,7 @@
 
 (defun fingers-set-mark-before-whitespace-and-return ()
   (let ((start-position (point)))
-    (skip-chars-backward " \t")
+    (fingers-skip-whitespace-backward)
     (set-mark (point))
     (goto-char start-position)))
 
@@ -359,12 +359,12 @@
 (defun fingers-mark-with-pair-strings-and-whitespace (start end)
   (fingers-move-point-to-pair-starting-string start end)
   (let ((starting-position (point)))
-    (skip-chars-backward " \t")
+    (fingers-skip-whitespace-backward)
     (set-mark (point))
     (goto-char starting-position))
   (fingers-move-point-to-pair-ending-string start end)
   (forward-char 1)
-  (skip-chars-forward " \t"))
+  (fingers-skip-whitespace-forward))
 
 (defun fingers-mark-with-pair-and-whitespace ()
   (fingers-dispatch-with-pair 'fingers-mark-with-pair-strings-and-whitespace))
