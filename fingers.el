@@ -585,6 +585,8 @@
     (h . mark-whole-buffer)
     (k . kill-buffer)
     (me . eshell)
+    (mcc . compile)
+    (xmcr . recompile)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
     (S . save-some-buffers)
