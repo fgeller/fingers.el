@@ -586,6 +586,7 @@
     (f . find-file)
     (h . mark-whole-buffer)
     (k . kill-buffer)
+    (K . ,(lambda () (interactive) (kill-buffer nil)))
     (l . ,fingers-mode-launch-map)
     (me . eshell)
     (mcc . compile)
