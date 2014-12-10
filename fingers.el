@@ -641,6 +641,7 @@
 (defvar fingers-toggle-bindings
   `(
     (l . toggle-truncate-lines)
+    (d . toggle-debug-on-error)
     (w . whitespace-mode)
     )
   "Bindings for `fingers-mode-toggle-map'")
