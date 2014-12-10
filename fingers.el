@@ -499,6 +499,8 @@
 (defvar fingers-mode-map (fingers-mode-clean-map))
 (defvar fingers-mode-x-map (fingers-mode-clean-map))
 (defvar fingers-mode-c-map (fingers-mode-clean-map))
+(defvar fingers-mode-toggle-map (fingers-mode-clean-map))
+(defvar fingers-mode-launch-map (fingers-mode-clean-map))
 
 (defvar fingers-command-bindings
     `(
@@ -584,12 +586,14 @@
     (f . find-file)
     (h . mark-whole-buffer)
     (k . kill-buffer)
+    (l . ,fingers-mode-launch-map)
     (me . eshell)
     (mcc . compile)
     (xmcr . recompile)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
     (S . save-some-buffers)
+    (t . ,fingers-mode-toggle-map)
     (vd . vc-diff)
     (vD . vc-root-diff)
     (ve . vc-version-ediff)
@@ -625,6 +629,21 @@
     )
   "Bindings for `fingers-mode-c-map'")
 
+(defvar fingers-launch-bindings
+  `(
+    (d . ediff-buffers)
+    (e . eshell)
+    (m . man)
+    )
+  "Bindings for `fingers-mode-launch-map'")
+
+(defvar fingers-toggle-bindings
+  `(
+    (l . toggle-truncate-lines)
+    (w . whitespace-mode)
+    )
+  "Bindings for `fingers-mode-toggle-map'")
+
 ;;
 ;; Main command mode map
 ;;
@@ -635,6 +654,12 @@
   (fingers-define-keys 'identity
 		       fingers-mode-x-map
 		       fingers-x-bindings)
+  (fingers-define-keys 'identity
+		       fingers-mode-launch-map
+		       fingers-launch-bindings)
+  (fingers-define-keys 'identity
+		       fingers-mode-toggle-map
+		       fingers-toggle-bindings)
   (fingers-define-keys 'identity
 		       fingers-mode-c-map
 		       fingers-c-bindings))
