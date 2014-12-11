@@ -589,8 +589,6 @@
     (K . ,(lambda () (interactive) (kill-buffer nil)))
     (l . ,fingers-mode-launch-map)
     (me . eshell)
-    (mcC . compile)
-    (mcc . recompile)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
     (S . save-some-buffers)
@@ -632,6 +630,8 @@
 
 (defvar fingers-launch-bindings
   `(
+    (C . compile)
+    (c . recompile)
     (d . ediff-buffers)
     (e . eshell)
     (m . man)
