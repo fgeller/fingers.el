@@ -635,6 +635,8 @@
     (d . ediff-buffers)
     (e . eshell)
     (m . man)
+    (oa . org-agenda)
+    (oc . org-capture)
     )
   "Bindings for `fingers-mode-launch-map'")
 
