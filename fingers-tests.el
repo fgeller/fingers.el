@@ -72,4 +72,31 @@
   (should (string= "" (fingers-test-fingers-mark-with-pair-strings-and-whitespace "  [abc]" 5 "[" "]")))
   (should (string= "" (fingers-test-fingers-mark-with-pair-strings-and-whitespace "  ((a) b (c))" 8 "(" ")")))
   (should (string= "" (fingers-test-fingers-mark-with-pair-strings-and-whitespace "  'abc'" 5 "'" "'")))
+  )
+
+(require 'fingers-qwerty)
+
+(ert-deftest fingers-test:workman-to-qwerty ()
+  (should (string= "atcwkugd;ynmvjloqesfibrxhzp" (fingers-workman-to-qwerty "abcdefghijklmnopqrstuvwxyz;")))
+  (should (string= "aTc" (fingers-workman-to-qwerty "aBc")))
+  (should (string= "SPC" (fingers-workman-to-qwerty "SPC")))
+  (should (string= "RET" (fingers-workman-to-qwerty "RET")))
+  (should (string= "'" (fingers-workman-to-qwerty "'")))
+  (should (string= ";" (fingers-workman-to-qwerty "i")))
+  (should (string= "p" (fingers-workman-to-qwerty ";")))
+  (should (string= ":" (fingers-workman-to-qwerty "I")))
+)
+
+(require 'fingers-neo)
+
+(ert-deftest fingers-test:workman-to-neo ()
+  (should (string= "uwpvrhoadkbmäntfxliegzcösüqjßy"
+		   (fingers-workman-to-neo "abcdefghijklmnopqrstuvwxyz;/['")))
+  (should (string= "uWp" (fingers-workman-to-neo "aBc")))
+  (should (string= "SPC" (fingers-workman-to-neo "SPC")))
+  (should (string= "RET" (fingers-workman-to-neo "RET")))
+  (should (string= "y" (fingers-workman-to-neo "'")))
+  (should (string= "d" (fingers-workman-to-neo "i")))
+  (should (string= "q" (fingers-workman-to-neo ";")))
+  (should (string= "D" (fingers-workman-to-neo "I")))
 )

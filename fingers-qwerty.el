@@ -102,15 +102,4 @@
 	  (t
 	   (apply 'concat (mapcar workman-to-qwerty keys))))))
 
-(ert-deftest fingers-test:workman-to-qwerty ()
-  (should (string= "atcwkugd;ynmvjloqesfibrxhzp" (fingers-workman-to-qwerty "abcdefghijklmnopqrstuvwxyz;")))
-  (should (string= "aTc" (fingers-workman-to-qwerty "aBc")))
-  (should (string= "SPC" (fingers-workman-to-qwerty "SPC")))
-  (should (string= "RET" (fingers-workman-to-qwerty "RET")))
-  (should (string= "'" (fingers-workman-to-qwerty "'")))
-  (should (string= ";" (fingers-workman-to-qwerty "i")))
-  (should (string= "p" (fingers-workman-to-qwerty ";")))
-  (should (string= ":" (fingers-workman-to-qwerty "I")))
-)
-
 (provide 'fingers-qwerty)

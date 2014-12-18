@@ -104,16 +104,4 @@
 	  (t
 	   (apply 'concat (mapcar workman-to-neo keys))))))
 
-(ert-deftest fingers-test:workman-to-neo ()
-  (should (string= "uwpvrhoadkbmäntfxliegzcösüqjßy"
-		   (fingers-workman-to-neo "abcdefghijklmnopqrstuvwxyz;/['")))
-  (should (string= "uWp" (fingers-workman-to-neo "aBc")))
-  (should (string= "SPC" (fingers-workman-to-neo "SPC")))
-  (should (string= "RET" (fingers-workman-to-neo "RET")))
-  (should (string= "y" (fingers-workman-to-neo "'")))
-  (should (string= "d" (fingers-workman-to-neo "i")))
-  (should (string= "q" (fingers-workman-to-neo ";")))
-  (should (string= "D" (fingers-workman-to-neo "I")))
-)
-
 (provide 'fingers-neo)
