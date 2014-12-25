@@ -7,7 +7,7 @@
 
   Cheat sheet:
 
-  [[https://raw.githubusercontent.com/fgeller/fingers.el/master/cheatsheet.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/cheatsheet.png]]
+  [[https://raw.githubusercontent.com/fgeller/fingers.el/master/images/cheatsheet.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/images/cheatsheet.png]]
 
 ** Installation
 
@@ -78,7 +78,7 @@
 
     Available bindings on the left hand (Workman layout):
 
-    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/text_manipulation.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/text_manipulation.png]]
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/images/text_manipulation.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/images/text_manipulation.png]]
 
     The home row binds common killing =t=, copying =T= and there are also
     functions to add a pair of surrounding strings =a= or remove them =s=, similar to
@@ -93,7 +93,7 @@
 
     The following table lists the region specifiers on the left hand (Workman layout):
 
-    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/region_specifiers.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/region_specifiers.png]]
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/images/region_specifiers.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/images/region_specifiers.png]]
 
     The available pairs are currently =()=, ={}=, =[]=, =<>=, "", `` and
     ''. Additionally, for pair selection you can double press the key for a
@@ -270,7 +270,7 @@
 
     Here's a demo for some of the examples above:
 
-    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/fingers-mode.gif][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/fingers-mode.gif]]
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/images/fingers-mode.gif][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/images/fingers-mode.gif]]
 
     All of these manipulation commands are text based rather than identifying
     syntactic components in the buffer. The goal are generally applicable
@@ -289,7 +289,7 @@
 
     Available bindings on the right hand (Workman layout), prefixes are marked by =(p)=:
 
-    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/navigation.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/navigation.png]]
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/images/navigation.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/images/navigation.png]]
 
     Regular cursor motion is available on the home row via bindings that mirror
     Vim's =hjkl= for left, down, up and right plus additional bindings for
