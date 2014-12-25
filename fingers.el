@@ -701,12 +701,6 @@ toggled to fall back to inserting text as usually in Emacs.
 Available bindings:
 
 \\{fingers-mode-map}
-The x prefix has the following bindings:
-
-\\{fingers-mode-x-map}
-The c prefix has the following bindings:
-
-\\{fingers-mode-c-map}
 "
   nil " fingers" fingers-mode-map :group 'fingers)
 
