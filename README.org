@@ -5,6 +5,10 @@
 
   [[http://melpa.milkbox.net:1337/#/fingers][file:http://melpa.milkbox.net:1337/packages/fingers-badge.svg]]
 
+  Cheat sheet:
+
+  [[https://raw.githubusercontent.com/fgeller/fingers.el/master/cheatsheet.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/cheatsheet.png]]
+
 ** Installation
 
    You can install this package via [[http://melpa.milkbox.net:1337/#/][MELPA]]
