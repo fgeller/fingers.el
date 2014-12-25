@@ -78,15 +78,7 @@
 
     Available bindings on the left hand (Workman layout):
 
-    |------------+------------------+--------------------------+---------------+-------------|
-    | *1*:         | *2*:               | *3*:                       | *4*:            | *5*:          |
-    |------------+------------------+--------------------------+---------------+-------------|
-    | *q*:         | *d*:duplicate line | *r*:query replace *R*:regexp | *w*:join line   | *b*:open line |
-    |------------+------------------+--------------------------+---------------+-------------|
-    | *a*:surround | *s*:splice         | *h*:yank *H*:show-kill-ring  | *t*:kill *T*:copy | *g*:M- *G*:C-M- |
-    |------------+------------------+--------------------------+---------------+-------------|
-    | *z*:repeat   | *x*:x-map          | *m*:macro-rec *M*:macro-end  | *c*:c-map       | *v*:repl char |
-    |------------+------------------+--------------------------+---------------+-------------|
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/text_manipulation.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/text_manipulation.png]]
 
     The home row binds common killing =t=, copying =T= and there are also
     functions to add a pair of surrounding strings =a= or remove them =s=, similar to
@@ -101,15 +93,7 @@
 
     The following table lists the region specifiers on the left hand (Workman layout):
 
-    |------------------+----------------+-------------+---------------------------+------------------------|
-    | *1*:               | *2*:             | *3*:          | *4*:                        | *5*:                     |
-    |------------------+----------------+-------------+---------------------------+------------------------|
-    | *q*:               | *d*:             | *r*:          | *w*:                        | *b*:                     |
-    |------------------+----------------+-------------+---------------------------+------------------------|
-    | *a*:with pair *A*:+w | *s*:between pair | *h*:word *H*:+w | *t*:symbol *T*:+w             | *g*:line *G*:till line end |
-    |------------------+----------------+-------------+---------------------------+------------------------|
-    | *z*:               | *x*:             | *m*:          | *c*:between whitespace *C*:+w | *v*:char *V*:+w            |
-    |------------------+----------------+-------------+---------------------------+------------------------|
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/region_specifiers.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/region_specifiers.png]]
 
     The available pairs are currently =()=, ={}=, =[]=, =<>=, "", `` and
     ''. Additionally, for pair selection you can double press the key for a
@@ -305,15 +289,7 @@
 
     Available bindings on the right hand (Workman layout), prefixes are marked by =(p)=:
 
-    |-------------+---------------+------------------+----------------+----------------+-----------------|
-    | *6*:          | *7*:            | *8*:               | *9*:             | *0*:             | *-*:              |
-    |-------------+---------------+------------------+----------------+----------------+-----------------|
-    | *j*:apropos   | *f*:register(p) | *u*:search down(p) | *p*:search up(p) | *;*:             | *[*:              |
-    |-------------+---------------+------------------+----------------+----------------+-----------------|
-    | *y*:bol *Y*:bob | *n*:left *N*:word | *e*:down *E*:page    | *o*:up *O*:page    | *i*:right *I*:word | *'*:eol *"*:eob |
-    |-------------+---------------+------------------+----------------+----------------+-----------------|
-    | *k*:grep      | *l*:            | *,*:             | *.*:             | */*:             |                 |
-    |-------------+---------------+------------------+----------------+----------------+-----------------|
+    [[https://raw.githubusercontent.com/fgeller/fingers.el/master/navigation.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/navigation.png]]
 
     Regular cursor motion is available on the home row via bindings that mirror
     Vim's =hjkl= for left, down, up and right plus additional bindings for
