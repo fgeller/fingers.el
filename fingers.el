@@ -136,7 +136,9 @@
 
 (defun fingers-beginning-of-line ()
   (interactive)
-  (beginning-of-visual-line))
+  (let ((start (point)))
+    (beginning-of-visual-line)
+    (when (= start (point)) (back-to-indentation))))
 
 (defun fingers-end-of-line ()
   (interactive)
