@@ -65,9 +65,11 @@
         (append (kbd kbd-string) unread-command-events)))
 
 (defmacro fingers-pass-events-command (kbd-string)
-  `(lambda ()
-     (interactive)
-     (fingers-pass-events ,kbd-string)))
+  (let ((command-name (intern (concat "fingers-pass-events-" (replace-regexp-in-string " " "_" kbd-string t t)))))
+    `(defun ,command-name ()
+       ,(concat "Pass the keyboard event " kbd-string " through via `fingers-pass-events'.")
+       (interactive)
+       (fingers-pass-events ,kbd-string))))
 
 (defun fingers-clear-keymap (keymap)
   (let (loop)
