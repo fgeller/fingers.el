@@ -134,6 +134,14 @@
     (setq isearch-string thing)
     (search-backward-regexp (concat "\\_<" (regexp-quote thing) "\\_>"))))
 
+(defun fingers-beginning-of-line ()
+  (interactive)
+  (beginning-of-visual-line))
+
+(defun fingers-end-of-line ()
+  (interactive)
+  (end-of-visual-line))
+
 ;;
 ;; Helpers for manipulation
 ;;
@@ -557,7 +565,7 @@
       (pt . fingers-move-to-previous-symbol-occurrence)
 
       ;; home row
-      (y . beginning-of-line)
+      (y . fingers-beginning-of-line)
       (Y . beginning-of-buffer)
       (n . left-char)
       (N . backward-word)
@@ -567,7 +575,7 @@
       (O . scroll-down-command)
       (i . right-char)
       (I . forward-word)
-      (,(intern "'") . end-of-line)
+      (,(intern "'") . fingers-end-of-line)
       (,(intern "\"") . end-of-buffer)
 
       ;; bottom row
