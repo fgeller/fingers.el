@@ -600,6 +600,7 @@
     (k . kill-buffer)
     (K . ,(lambda () (interactive) (kill-buffer nil)))
     (l . ,fingers-mode-launch-map)
+    (m . message-mail)
     (o . other-window)
     (s . ,(fingers-pass-events-command "C-x C-s"))
     (S . save-some-buffers)
