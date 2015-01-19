@@ -649,6 +649,10 @@
     (m . man)
     (oa . org-agenda)
     (oc . org-capture)
+    (ol . org-store-link)
+    (oki . org-clock-in)
+    (oko . org-clock-out)
+    (okj . org-clock-jump-to-current-clock)
     )
   "Bindings for `fingers-mode-launch-map'")
 
