@@ -627,6 +627,7 @@
     (b . ,(fingers-pass-events-command "C-c C-b"))
     (c . ,(fingers-pass-events-command "C-c C-c"))
     (d . ,(fingers-pass-events-command "C-c C-d"))
+    (e . ,(fingers-pass-events-command "C-c C-e"))
     (f . ,(fingers-pass-events-command "C-c C-f"))
     (k . ,(fingers-pass-events-command "C-c C-k"))
     (l . ,(fingers-pass-events-command "C-c C-l"))
