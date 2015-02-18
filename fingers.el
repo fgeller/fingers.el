@@ -624,6 +624,7 @@
 
 (defvar fingers-c-bindings
   `(
+    (a . ,(fingers-pass-events-command "C-c C-a"))
     (b . ,(fingers-pass-events-command "C-c C-b"))
     (c . ,(fingers-pass-events-command "C-c C-c"))
     (d . ,(fingers-pass-events-command "C-c C-d"))
