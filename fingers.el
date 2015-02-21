@@ -567,6 +567,8 @@
       (pp . isearch-repeat-backward)
       (ph . fingers-move-to-previous-word-occurrence)
       (pt . fingers-move-to-previous-symbol-occurrence)
+      (,(intern ";") . pop-to-mark-command)
+      (,(intern ":") . pop-global-mark)
 
       ;; home row
       (y . fingers-beginning-of-line)
