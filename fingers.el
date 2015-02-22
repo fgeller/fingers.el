@@ -632,8 +632,8 @@
               `(a b c d e f g h i j k l m n o p q r s t u v w y z))
 
     (xa . ,(fingers-pass-events-command "C-c C-x C-a"))
-    (,(intern "'") . ,(fpec "C-c '"))
-    (,(intern "!") . ,(fpec "C-c !"))
+    (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
+    (,(intern "!") . ,(fingers-pass-events-command "C-c !"))
   )
   "Bindings for `fingers-mode-c-map'")
 
