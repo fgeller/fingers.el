@@ -40,7 +40,7 @@
 ;;
 
 (defvar fingers-keyboard-layout-mapper 'identity "Mapping function from Workman to a different keyboard layout")
-(defvar fingers-region-specifiers
+(defconst fingers-region-specifiers
   '((char . ?v)
     (char-and-whitespace . ?V)
     (line . ?g)
@@ -515,7 +515,7 @@
 (defvar fingers-mode-toggle-map (fingers-mode-clean-map))
 (defvar fingers-mode-launch-map (fingers-mode-clean-map))
 
-(defvar fingers-command-bindings
+(defconst fingers-command-bindings
     `(
       ;; left hand -- manipulation
       ;;
@@ -593,7 +593,7 @@
       )
     "Main bindings in `fingers-mode-map'")
 
-(defvar fingers-x-bindings
+(defconst fingers-x-bindings
   `(
     (b . switch-to-buffer)
     (c . save-buffers-kill-terminal)
@@ -625,7 +625,7 @@
     )
   "Bindings for `fingers-mode-x-map'")
 
-(defvar fingers-c-bindings
+(defconst fingers-c-bindings
   `(
     ,@(mapcar (lambda (sym)
                 `(,sym . ,(fingers-pass-events-command (concat "C-c C-" (symbol-name sym)))))
@@ -637,7 +637,7 @@
   )
   "Bindings for `fingers-mode-c-map'")
 
-(defvar fingers-launch-bindings
+(defconst fingers-launch-bindings
   `(
     (C . compile)
     (c . recompile)
@@ -653,7 +653,7 @@
     )
   "Bindings for `fingers-mode-launch-map'")
 
-(defvar fingers-toggle-bindings
+(defconst fingers-toggle-bindings
   `(
     (l . toggle-truncate-lines)
     (d . toggle-debug-on-error)
