@@ -64,12 +64,13 @@
   (setq unread-command-events
         (append (kbd kbd-string) unread-command-events)))
 
-(defmacro fingers-pass-events-command (kbd-string)
-  (let ((command-name (intern (concat "fingers-pass-events-" (replace-regexp-in-string " " "_" kbd-string t t)))))
-    `(defun ,command-name ()
-       ,(concat "Pass the keyboard event " kbd-string " through via `fingers-pass-events'.")
-       (interactive)
-       (fingers-pass-events ,kbd-string))))
+(defun fingers-pass-events-command (k)
+  (lexical-let ((kbd-string k)) ;; rebind so it isn't lost
+    (defalias (intern (concat "fingers-pass-events-" (replace-regexp-in-string " " "_" kbd-string t t)))
+      #'(lambda nil
+          "Generated function to pass a keybard event (last part of the name) through via `fingers-pass-events'."
+          (interactive)
+          (fingers-pass-events kbd-string)))))
 
 (defun fingers-clear-keymap (keymap)
   (let (loop)
@@ -626,23 +627,14 @@
 
 (defvar fingers-c-bindings
   `(
-    (a . ,(fingers-pass-events-command "C-c C-a"))
-    (b . ,(fingers-pass-events-command "C-c C-b"))
-    (c . ,(fingers-pass-events-command "C-c C-c"))
-    (d . ,(fingers-pass-events-command "C-c C-d"))
-    (e . ,(fingers-pass-events-command "C-c C-e"))
-    (f . ,(fingers-pass-events-command "C-c C-f"))
-    (k . ,(fingers-pass-events-command "C-c C-k"))
-    (l . ,(fingers-pass-events-command "C-c C-l"))
-    (p . ,(fingers-pass-events-command "C-c C-p"))
-    (q . ,(fingers-pass-events-command "C-c C-q"))
-    (s . ,(fingers-pass-events-command "C-c C-s"))
-    (t . ,(fingers-pass-events-command "C-c C-t"))
-    (w . ,(fingers-pass-events-command "C-c C-w"))
+    ,@(mapcar (lambda (sym)
+                `(,sym . ,(fingers-pass-events-command (concat "C-c C-" (symbol-name sym)))))
+              `(a b c d e f g h i j k l m n o p q r s t u v w y z))
+
     (xa . ,(fingers-pass-events-command "C-c C-x C-a"))
-    (! . ,(fingers-pass-events-command "C-c !"))
-    (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
-    )
+    (,(intern "'") . ,(fpec "C-c '"))
+    (,(intern "!") . ,(fpec "C-c !"))
+  )
   "Bindings for `fingers-mode-c-map'")
 
 (defvar fingers-launch-bindings
