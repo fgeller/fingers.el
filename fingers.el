@@ -622,6 +622,7 @@
     (3 . split-window-right)
     (50 . delete-frame)
     (52 . make-frame-command)
+    (,(intern "#") . server-edit)
     )
   "Bindings for `fingers-mode-x-map'")
 
