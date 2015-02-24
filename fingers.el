@@ -679,7 +679,8 @@
 		       fingers-toggle-bindings)
   (fingers-define-keys 'identity
 		       fingers-mode-c-map
-		       fingers-c-bindings))
+		       fingers-c-bindings)
+  (run-hooks 'fingers-after-reset-hook))
 
 (fingers-reset-bindings)
 
