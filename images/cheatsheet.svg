@@ -13,9 +13,9 @@
    height="1800"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r"
-   sodipodi:docname="keyboard.svg"
-   inkscape:export-filename="/Users/fgeller/Desktop/keyboard.png"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="cheatsheet.svg"
+   inkscape:export-filename="/Users/fgeller/code/fingers/images/cheatsheet.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -35,14 +35,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="913.91756"
-     inkscape:cy="1185.3536"
+     inkscape:zoom="1.63"
+     inkscape:cx="1053.6221"
+     inkscape:cy="1564.7441"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1438"
-     inkscape:window-height="831"
+     inkscape:window-width="1421"
+     inkscape:window-height="1078"
      inkscape:window-x="4"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -55,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -738,7 +738,7 @@
          x="461.85837"
          y="-523.79974">w</tspan></text>
     <rect
-       style="fill:#f8f8f8;fill-opacity:1;fill-rule:evenodd;stroke:#d8d8d8;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#7cafc0;fill-opacity:1;fill-rule:evenodd;stroke:#d8d8d8;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3004-9-7"
        width="115.71429"
        height="106.42857"
@@ -2592,7 +2592,7 @@
            x="1391.9675"
            y="436.28171"
            style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Droid Sans Mono;-inkscape-font-specification:Droid Sans Mono" /></flowRegion><flowPara
-         id="flowPara4915"></flowPara></flowRoot>    <text
+         id="flowPara4915" /></flowRoot>    <text
        xml:space="preserve"
        style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans Mono;-inkscape-font-specification:Droid Sans Mono"
        x="155.56349"
@@ -3251,9 +3251,9 @@
          y="-526.63782">join-line</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="628"
-       y="-530.63782"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       x="494.34158"
+       y="-477.97583"
        id="text5117"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/Users/fgeller/Desktop/keyboard.png"
@@ -3261,8 +3261,8 @@
        inkscape:export-ydpi="92"><tspan
          sodipodi:role="line"
          id="tspan5119"
-         x="628"
-         y="-530.63782">open-line</tspan></text>
+         x="494.34158"
+         y="-477.97583">open-line</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
@@ -5362,7 +5362,7 @@
            height="454"
            x="12"
            y="694" /></flowRegion><flowPara
-         id="flowPara7635"></flowPara></flowRoot>    <rect
+         id="flowPara7635" /></flowRoot>    <rect
        style="fill:#ba8baf;fill-opacity:1;stroke:#d8d8d8;stroke-width:1.24301827;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect7850"
        width="108.65143"
@@ -5471,5 +5471,94 @@
        inkscape:export-xdpi="92"
        inkscape:export-ydpi="92"
        inkscape:export-filename="/Users/fgeller/Desktop/keyboard.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="627.07831"
+       y="-536.94226"
+       id="text7174"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7176"
+         x="627.07831"
+         y="-536.94226"
+         style="font-size:12px">universal-</tspan><tspan
+         sodipodi:role="line"
+         x="627.07831"
+         y="-521.94226"
+         id="tspan7178"
+         style="font-size:12px">argument</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1027.153"
+       y="-489.56778"
+       id="text7180"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7182"
+         x="1027.153"
+         y="-489.56778">isearch-</tspan><tspan
+         sodipodi:role="line"
+         x="1027.153"
+         y="-474.56778"
+         id="tspan7186">forward-</tspan><tspan
+         sodipodi:role="line"
+         x="1027.153"
+         y="-459.56778"
+         id="tspan7190">repeat</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1154.6012"
+       y="-489.96918"
+       id="text7192"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7194"
+         x="1154.6012"
+         y="-489.96918">isearch-</tspan><tspan
+         sodipodi:role="line"
+         x="1154.6012"
+         y="-474.96918"
+         id="tspan7196">backward-</tspan><tspan
+         sodipodi:role="line"
+         x="1154.6012"
+         y="-459.96918"
+         id="tspan7198">repeat</tspan><tspan
+         sodipodi:role="line"
+         x="1154.6012"
+         y="-444.96918"
+         id="tspan7200" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1291.411"
+       y="-535.36798"
+       id="text4039"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4041"
+         x="1291.411"
+         y="-535.36798">pop-to-</tspan><tspan
+         sodipodi:role="line"
+         x="1291.411"
+         y="-520.36798"
+         id="tspan4043">mark</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1284.6626"
+       y="-485.67471"
+       id="text4045"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="1284.6626"
+         y="-485.67471"
+         id="tspan4049">pop-global-</tspan><tspan
+         sodipodi:role="line"
+         x="1284.6626"
+         y="-470.67471"
+         id="tspan4053">mark</tspan></text>
   </g>
 </svg>
