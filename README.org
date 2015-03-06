@@ -292,7 +292,7 @@
 
 *** Right Hand: Navigation
 
-    Available bindings on the right hand (Workman layout), prefixes are marked by =(p)=:
+    Available bindings on the right hand (Workman layout), prefixs are color coded::
 
     [[https://raw.githubusercontent.com/fgeller/fingers.el/master/images/navigation.png][file:https://raw.githubusercontent.com/fgeller/fingers.el/master/images/navigation.png]]
 
