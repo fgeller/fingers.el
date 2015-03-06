@@ -285,6 +285,11 @@
     =M-= and =C-M-= respectively. So pressing =g;= is like pressing =M-;= and
     commonly triggers =comment-dwim=.
 
+    The =universal-argument= is bound to =b= by default to easily toggle between
+    different modes for commands. For example, pressing =w= will join the current
+    line to the previous one, pressing =bw= will join the next line to the current
+    one.
+
 *** Right Hand: Navigation
 
     Available bindings on the right hand (Workman layout), prefixes are marked by =(p)=:
@@ -305,8 +310,8 @@
     ffb= and to restore it =ffb=.
 
     Middle and ring finger start prefixes for searching down =u= and up =p=. To
-    start a search from point forward, press =ue= and enter the search string
-    (=po= for backwards search). For example, pressing =uewhite= for the
+    start a search from point forward, press =uu= and enter the search string
+    (=pp= for backwards search). For example, pressing =uuwhite= for the
     following snippet:
 
     #+begin_src emacs-lisp
@@ -354,8 +359,8 @@
         (cdr (assoc type fingers-region-specifiers)))
     #+end_src
 
-    Exit isearch via =RET= and continue searching downward via =uu= or upward
-    via =pp=. Alternatively you can press =uo= to trigger =occur= for the
+    Exit isearch via =RET= and continue searching downward via =U= or upward
+    via =P=. Alternatively you can press =uo= to trigger =occur= for the
     current search string =white=.
 
     Additionally you can use =ut= and =pt= to jump to the next or previous
