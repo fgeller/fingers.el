@@ -43,6 +43,17 @@
 
     Continue reading for more information on the available bindings.
 
+** Recent changes
+
+   - Search prefixes and bindings for repition changed: =uu=/=pp= to start
+     searching, =U=/=P= to repeat search.
+
+   - Added bindings for =universal-argument=, and commands to pop local and global
+     marks.
+
+   - Added hook for customizing key-bindings. Simplifies =eval-buffer= to test new
+     bindings while maintaining custom bindings.
+
 ** Details
 
    =fingers-mode= is a global minor mode that introduces key bindings for
