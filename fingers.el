@@ -528,7 +528,8 @@
       (r . query-replace)
       (R . query-replace-regexp)
       (w . join-line)
-      (b . open-line)
+      (W . open-line)
+      (b . universal-argument)
 
       ;; home row
       (a . fingers-enclose-in-pair)
