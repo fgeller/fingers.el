@@ -45,8 +45,8 @@
 
 ** Recent changes
 
-   - Search prefixes and bindings for repition changed: =uu=/=pp= to start
-     searching, =U=/=P= to repeat search.
+   - Search prefixes and bindings for repition changed: =uu= / =pp= to start
+     searching, =U= / =P= to repeat search.
 
    - Added bindings for =universal-argument=, and commands to pop local and global
      marks.
