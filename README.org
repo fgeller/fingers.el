@@ -45,18 +45,20 @@
 
 ** Recent changes
 
-   - Added + and - bindings to increment and decrement number under point.
+   - [2015-03-21 Sat]: Added + and - bindings to increment and decrement number
+     under point.
 
-   - Switched bindings for region specifiers "line" and "till line end"
+   - [2015-03-21 Sat]: Switched bindings for region specifiers "line" and "till
+     line end"
 
-   - Search prefixes and bindings for repition changed: =uu= / =pp= to start
-     searching, =U= / =P= to repeat search.
+   - [2015-03-07 Sat]: Search prefixes and bindings for repition changed: =uu= /
+     =pp= to start searching, =U= / =P= to repeat search.
 
-   - Added bindings for =universal-argument=, and commands to pop local and global
-     marks.
+   - [2015-03-07 Sat]: Added bindings for =universal-argument=, and commands to
+     pop local and global marks.
 
-   - Added hook for customizing key-bindings. Simplifies =eval-buffer= to test new
-     bindings while maintaining custom bindings.
+   - [2015-03-07 Sat]: Added hook for customizing key-bindings. Simplifies
+     =eval-buffer= to test new bindings while maintaining custom bindings.
 
 ** Details
 
