@@ -45,8 +45,8 @@
 (defvar fingers-qwerty-region-specifiers
   '((char . ?b)
     (char-and-whitespace . ?B)
-    (line . ?g)
-    (line-rest . ?G)
+    (line . ?G)
+    (line-rest . ?g)
     (word . ?d)
     (word-and-whitespace . ?D)
     (symbol . ?f)

@@ -43,8 +43,8 @@
 (defconst fingers-region-specifiers
   '((char . ?v)
     (char-and-whitespace . ?V)
-    (line . ?g)
-    (line-rest . ?G)
+    (line . ?G)
+    (line-rest . ?g)
     (word . ?h)
     (word-and-whitespace . ?H)
     (symbol . ?t)

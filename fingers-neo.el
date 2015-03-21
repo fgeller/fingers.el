@@ -43,8 +43,8 @@
 (defvar fingers-neo-region-specifiers
   '((char . ?z)
     (char-and-whitespace . ?Z)
-    (line . ?o)
-    (line-rest . ?O)
+    (line . ?O)
+    (line-rest . ?o)
     (word . ?a)
     (word-and-whitespace . ?A)
     (symbol . ?e)

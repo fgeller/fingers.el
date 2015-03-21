@@ -45,6 +45,8 @@
 
 ** Recent changes
 
+   - Switched bindings for region specifiers "line" and "till line end"
+
    - Search prefixes and bindings for repition changed: =uu= / =pp= to start
      searching, =U= / =P= to repeat search.
 
@@ -329,8 +331,8 @@
       (defvar fing|ers-region-specifiers
         '((char . ?v)
           (char-and-whitespace . ?V)
-          (line . ?g)
-          (line-rest . ?G)
+          (line . ?G)
+          (line-rest . ?g)
           (word . ?h)
           (word-and-whitespace . ?H)
           (symbol . ?t)
@@ -353,8 +355,8 @@
       (defvar fingers-region-specifiers
         '((char . ?v)
           (char-and-[white]space . ?V)
-          (line . ?g)
-          (line-rest . ?G)
+          (line . ?G)
+          (line-rest . ?g)
           (word . ?h)
           (word-and-[white]space . ?H)
           (symbol . ?t)
@@ -383,8 +385,8 @@
       (defvar finge|rs-region-specifiers
         '((char . ?v)
           (char-and-whitespace . ?V)
-          (line . ?g)
-          (line-rest . ?G)
+          (line . ?G)
+          (line-rest . ?g)
           (word . ?h)
           (word-and-whitespace . ?H)
           (symbol . ?t)
@@ -407,8 +409,8 @@
       (defvar fingers-region-specifiers
         '((char . ?v)
           (char-and-whitespace . ?V)
-          (line . ?g)
-          (line-rest . ?G)
+          (line . ?G)
+          (line-rest . ?g)
           (word . ?h)
           (word-and-whitespace . ?H)
           (symbol . ?t)

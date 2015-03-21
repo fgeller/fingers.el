@@ -35,14 +35,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.63"
-     inkscape:cx="1053.6221"
-     inkscape:cy="1564.7441"
+     inkscape:zoom="0.815"
+     inkscape:cx="710.06382"
+     inkscape:cy="1073.9466"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1421"
-     inkscape:window-height="1078"
+     inkscape:window-width="1516"
+     inkscape:window-height="1132"
      inkscape:window-x="4"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -5200,9 +5200,9 @@
          id="tspan7571">whitespace</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
        x="638.47058"
-       y="171.34735"
+       y="223.34735"
        id="text7573"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/Users/fgeller/Desktop/keyboard.png"
@@ -5211,12 +5211,12 @@
          sodipodi:role="line"
          id="tspan7575"
          x="638.47058"
-         y="171.34735">line</tspan></text>
+         y="223.34735">line</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
        x="621.5"
-       y="221.34735"
+       y="173.34735"
        id="text7577"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/Users/fgeller/Desktop/keyboard.png"
@@ -5225,7 +5225,7 @@
          sodipodi:role="line"
          id="tspan7579"
          x="621.5"
-         y="221.34735">till line end</tspan></text>
+         y="173.34735">till line end</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
