@@ -582,7 +582,8 @@
       ;; top row
       (j . apropos)
       (J . ,(fingers-pass-events-command "C-h"))
-      (fn . point-to-register)
+      (fp . point-to-register)
+      (fw . window-configuration-to-register)
       (ff . jump-to-register)
       (uu . isearch-forward)
       (U . isearch-repeat-forward)
