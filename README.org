@@ -45,6 +45,8 @@
 
 ** Recent changes
 
+   - Added + and - bindings to increment number under point.
+
    - Switched bindings for region specifiers "line" and "till line end"
 
    - Search prefixes and bindings for repition changed: =uu= / =pp= to start
