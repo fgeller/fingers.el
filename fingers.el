@@ -663,6 +663,7 @@
     (xa . ,(fingers-pass-events-command "C-c C-x C-a"))
     (,(intern "'") . ,(fingers-pass-events-command "C-c '"))
     (,(intern "!") . ,(fingers-pass-events-command "C-c !"))
+    (,(intern "/") . ,(fingers-pass-events-command "C-c /"))
     (RET . ,(fingers-pass-events-command "C-c RET"))
   )
   "Bindings for `fingers-mode-c-map'")
