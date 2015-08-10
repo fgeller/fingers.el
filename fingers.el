@@ -163,6 +163,14 @@
     (insert char-to-insert)
     (backward-char 1)))
 
+(defun fingers-replace-with-yank ()
+  (interactive)
+  (let (a)
+    (if (region-active-p)
+        (delete-region (point) (mark))
+      (delete-char 1))
+    (yank)))
+
 (defun fingers-copy-current-region (&optional kill)
   (cond (kill (kill-region (point) (mark)))
 	(t (kill-ring-save (point) (mark)))))
@@ -572,6 +580,7 @@
       (M . kmacro-end-macro)
       (c . ,fingers-mode-c-map)
       (v . fingers-replace-char)
+      (V . fingers-replace-with-yank)
 
       ;; right hand -- navigation
       ;;

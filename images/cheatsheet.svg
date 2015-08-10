@@ -36,12 +36,12 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.63"
-     inkscape:cx="1352.3951"
-     inkscape:cy="1560.4497"
+     inkscape:cx="763.43804"
+     inkscape:cy="1315.0509"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
+     inkscape:window-width="1436"
      inkscape:window-height="855"
      inkscape:window-x="4"
      inkscape:window-y="0"
@@ -5698,5 +5698,24 @@
          id="tspan5669"
          x="1420.8589"
          y="-653.15936">decrement</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="619.01843"
+       y="-242.11646"
+       id="text4914"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="619.01843"
+         y="-242.11646"
+         id="tspan4918">fingers-</tspan><tspan
+         sodipodi:role="line"
+         x="619.01843"
+         y="-227.11646"
+         id="tspan4924">replace-</tspan><tspan
+         sodipodi:role="line"
+         x="619.01843"
+         y="-212.11646"
+         id="tspan4920">with-yank</tspan></text>
   </g>
 </svg>
