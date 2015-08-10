@@ -45,7 +45,7 @@
 
 ** Recent change
 
-   - [2015-08-09 Sun]: Added `fingers-replace-with-yank` bound to `V` by default.
+   - [2015-08-09 Sun]: Added =fingers-replace-with-yank= bound to =V= by default.
 
    - [2015-03-21 Sat]: Added + and - bindings to increment and decrement number
      under point.
