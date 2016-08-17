@@ -3,7 +3,7 @@
   Modal text editing for Emacs: A collection of key bindings for navigation and
   text manipulation.
 
-  [[http://melpa.milkbox.net:1337/#/fingers][file:http://melpa.milkbox.net:1337/packages/fingers-badge.svg]]
+  [[https://melpa.org/#/fingers][file:https://melpa.org/packages/fingers-badge.svg]]
 
   Cheat sheet:
 
