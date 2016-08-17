@@ -1,6 +1,6 @@
 ;;; fingers.el --- Modal editing with universal text manipulation helpers.
 
-;; Copyright (c) 2014-2015 Felix Geller
+;; Copyright (c) 2014-2016 Felix Geller
 
 ;; Author: Felix Geller <fgeller@gmail.com>
 ;; Keywords: fingers modal editing workman
